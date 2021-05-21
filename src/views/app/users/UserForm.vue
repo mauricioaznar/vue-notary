@@ -112,7 +112,7 @@ import FormLayout from '@/components/forms/FormLayout.vue'
 import VeeTextField from '@/components/forms/VeeTextField.vue'
 import {mapActions, mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {User} from '@/models/User'
@@ -165,7 +165,7 @@ export default Vue.extend({
       if (this.id) {
         try {
           this.loading = true
-          const result = await MONS.get(`users/${this.id}`)
+          const result = await NOTARY.get(`users/${this.id}`)
           const user = result.data as User
           this.user.name = user.name
           this.user.lastname = user.lastname
@@ -180,7 +180,7 @@ export default Vue.extend({
     },
     generateResetTokenLink: async function () {
       try {
-        const response = await MONS
+        const response = await NOTARY
             .post(`auth/generate_reset_token`, {userId: parseInt(this.id)})
         console.log(window.location)
         this.resetTokenLink
@@ -195,10 +195,10 @@ export default Vue.extend({
         const {password1, password2, ...userData} = this.user
         try {
           if (this.id) {
-            await MONS
+            await NOTARY
                 .patch(`users/${this.id}`, userData )
           } else {
-            await MONS
+            await NOTARY
                 .post(`users`, {...userData, password: password1})
           }
           this.$router.back()

@@ -90,7 +90,7 @@ import VeeTime from '@/components/forms/VeeTime.vue'
 import VeeDate from '@/components/forms/VeeDate.vue'
 import {mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {Appointment} from '@/models/Appointment'
@@ -153,7 +153,7 @@ export default Vue.extend({
       if (this.id) {
         try {
           this.loading = true
-          const result = await MONS.get(`appointments/${this.id}`)
+          const result = await NOTARY.get(`appointments/${this.id}`)
           const appointment = result.data as Appointment
           this.initialAppointment = result.data as Appointment
           this.appointment.name = appointment.name
@@ -183,9 +183,9 @@ export default Vue.extend({
         }
         try {
           if (this.id) {
-            await MONS.patch(`appointments/${this.id}`, appointmentsData)
+            await NOTARY.patch(`appointments/${this.id}`, appointmentsData)
           } else {
-            await MONS.post(`appointments`, appointmentsData)
+            await NOTARY.post(`appointments`, appointmentsData)
           }
           this.$router.back()
         } catch (e) {

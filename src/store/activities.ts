@@ -1,5 +1,5 @@
 import {ActionTree, GetterTree, MutationTree} from "vuex"
-import {MONS} from "@/api/MONS";
+import {NOTARY} from "@/api/NOTARY";
 import moment from "moment";
 import {dateTimeFormat} from "@/helpers/dateFormats";
 
@@ -29,7 +29,7 @@ const actions = <ActionTree<State, any>>{
         dispatch(`statics/${data.entityName}_${data.type}`, data.entity, { root: true })
     },
     async getActivities ({ commit }) {
-        const response = await MONS.get('activities')
+        const response = await NOTARY.get('activities')
         const activities = response.data
         commit('setActivities', activities)
     },

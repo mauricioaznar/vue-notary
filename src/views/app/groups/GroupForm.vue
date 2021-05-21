@@ -49,7 +49,7 @@ import FormLayout from '@/components/forms/FormLayout.vue'
 import VeeTextField from '@/components/forms/VeeTextField.vue'
 import {mapActions, mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {Group} from '@/models/Group'
@@ -92,7 +92,7 @@ export default Vue.extend({
       if (this.id) {
         try {
           this.loading = true
-          const result = await MONS.get(`groups/${this.id}`)
+          const result = await NOTARY.get(`groups/${this.id}`)
           const group = result.data as Group
           this.group.name = group.name
           this.group.userId = group.userId
@@ -111,9 +111,9 @@ export default Vue.extend({
         }
         try {
           if (this.id) {
-            await MONS.patch(`groups/${this.id}`, groupData)
+            await NOTARY.patch(`groups/${this.id}`, groupData)
           } else {
-            await MONS.post(`groups`, groupData)
+            await NOTARY.post(`groups`, groupData)
           }
           this.$router.back()
         } catch (e) {

@@ -25,7 +25,7 @@
 <script>
 import VeeTextField from "@/components/forms/VeeTextField";
 import FormLayout from "@/components/forms/FormLayout";
-import {MONS} from "@/api/MONS";
+import {NOTARY} from "@/api/NOTARY";
 import ErrorToaster from "@/views/app/ErrorToaster";
 export default {
   components: {ErrorToaster, FormLayout, VeeTextField},
@@ -46,7 +46,7 @@ export default {
     save: async function (isValid) {
       if (isValid) {
         try {
-          const response = await MONS.post(`auth/change_password/${this.token}`, {
+          const response = await NOTARY.post(`auth/change_password/${this.token}`, {
             password: this.password1
           })
           console.log(response)

@@ -115,7 +115,7 @@
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {User} from '@/models/User'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 
 export default {
   name: 'SimplePaginationTable',
@@ -220,7 +220,7 @@ export default {
     },
     deleteItem: async function (item: User) {
       try {
-        await MONS.delete(`${this.entityUrl}/${item.id}`)
+        await NOTARY.delete(`${this.entityUrl}/${item.id}`)
         this.items = this.items.filter(c => {
           return c.id !== this.selectedItem?.id
         })
@@ -232,7 +232,7 @@ export default {
       this.loading = true
       try {
         const responses = await Promise.all([
-          MONS.get(`${this.entityUrl}`, {
+          NOTARY.get(`${this.entityUrl}`, {
             params: {...this.fetchParams}
           })
         ])

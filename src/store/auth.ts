@@ -1,5 +1,5 @@
 import {ActionTree, GetterTree, MutationTree} from "vuex"
-import {MONS} from "@/api/MONS";
+import {NOTARY} from "@/api/NOTARY";
 
 class State {
   authenticated = false
@@ -25,25 +25,25 @@ const mutations = <MutationTree<State>>{
 const actions = <ActionTree<State, any>>{
   async logIn(vuexObj, credentials) {
     const { email, password } = credentials
-    const response = await MONS.post('auth/login', {
+    const response = await NOTARY.post('auth/login', {
       email,
       password
     })
     if (response.status === 201) {
       const token = `Bearer ${response.data.access_token}`
-      MONS.defaults.headers.Authorization = token
+      NOTARY.defaults.headers.Authorization = token
       window.localStorage.setItem('authToken', token)
       vuexObj.commit('setAuthenticated')
     }
   },
   async signOut({commit}) {
-    await MONS.get('auth/logout')
+    await NOTARY.get('auth/logout')
     window.localStorage.removeItem('authToken')
     window.location.reload()
     commit('unsetAuthenticated')
   },
   async getProfile({commit}) {
-    const result = await MONS.get('profile')
+    const result = await NOTARY.get('profile')
     if (result.data && result.status === 200) {
       commit('setProfile', result.data)
       commit('setAuthenticated')

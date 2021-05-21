@@ -31,7 +31,6 @@
         item-text="fullname"
         item-value="id"
         return-object
-        rules="required"
     >
     </vee-autocomplete>
     <ErrorToaster
@@ -51,7 +50,7 @@ import FormLayout from '@/components/forms/FormLayout.vue'
 import VeeTextField from '@/components/forms/VeeTextField.vue'
 import {mapActions, mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {Grantor} from '@/models/Grantor'
@@ -95,7 +94,7 @@ export default Vue.extend({
       if (this.id) {
         try {
           this.loading = true
-          const result = await MONS.get(`grantors/${this.id}`)
+          const result = await NOTARY.get(`grantors/${this.id}`)
           const grantor = result.data as Grantor
           this.grantor.name = grantor.name
           this.grantor.lastname = grantor.lastname
@@ -115,9 +114,9 @@ export default Vue.extend({
         }
         try {
           if (this.id) {
-            await MONS.patch(`grantors/${this.id}`, grantorData)
+            await NOTARY.patch(`grantors/${this.id}`, grantorData)
           } else {
-            await MONS.post(`grantors`, grantorData)
+            await NOTARY.post(`grantors`, grantorData)
           }
           this.$router.back()
         } catch (e) {

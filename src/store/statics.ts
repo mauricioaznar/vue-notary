@@ -1,5 +1,5 @@
 import {ActionTree, MutationTree} from 'vuex'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 
 class State {
 	rooms = []
@@ -197,7 +197,7 @@ const actions = <ActionTree<State, any>>{
 		commit('deleteUser', data)
 	},
 	async getStatics ({commit}) {
-		const response = await MONS.get('statics')
+		const response = await NOTARY.get('statics')
 		const {
 			rooms,
 			clients,

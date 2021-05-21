@@ -120,7 +120,7 @@
 <script>
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import Vue from "vue";
 
 export default {
@@ -203,7 +203,7 @@ export default {
       }
       try {
         const responses = await Promise.all([
-          MONS.get(`${this.entityUrl}/pagination?`, {params})
+          NOTARY.get(`${this.entityUrl}/pagination?`, {params})
         ])
         const response1 = responses[0]
         if (response1.data) {
@@ -230,7 +230,7 @@ export default {
     },
     deleteItem: async function (item) {
       try {
-        await MONS.delete(`${this.entityUrl}/${item.id}`)
+        await NOTARY.delete(`${this.entityUrl}/${item.id}`)
         await this.customFetch()
       } catch (e) {
         this.deleteError = e

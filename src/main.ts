@@ -12,8 +12,8 @@ import io from 'socket.io-client';
 Vue.config.productionTip = false
 
 const baseUrl = process.env.NODE_ENV === 'production'
-    ? 'https://monsreal.mauaznar.com/'
-    : 'http://localhost:3001'
+    ? 'https://notary-server.mauaznar.com/'
+    : 'http://localhost:3002'
 
 const socket = io(baseUrl);
 

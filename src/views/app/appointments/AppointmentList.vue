@@ -146,7 +146,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import {Appointment} from '@/models/Appointment'
 import VeeDate from '@/components/forms/VeeDate.vue'
 import moment from 'moment'
@@ -226,7 +226,7 @@ export default Vue.extend({
       this.loading = true
       try {
         const responses = await Promise.all([
-          MONS.get(`appointments?startDate=${this.selectedDate}`)
+          NOTARY.get(`appointments?startDate=${this.selectedDate}`)
         ])
         const appointments = responses[0]
         if (appointments.data) {
@@ -252,7 +252,7 @@ export default Vue.extend({
     },
     deleteItem: async function (item: Appointment) {
       try {
-        await MONS.delete(`appointments/${item.id}`)
+        await NOTARY.delete(`appointments/${item.id}`)
         this.appointments = this.appointments.filter(appointment => {
           return appointment.id !== this.selectedAppointment?.id
         })

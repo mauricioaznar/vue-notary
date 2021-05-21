@@ -19,7 +19,7 @@ import LoaderSimple from '@/components/loaders/LoaderSimple.vue';
 import Navbar from '@/views/app/Navbar.vue'
 import {mapActions, mapState} from 'vuex'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import ActivityToaster from "@/views/app/activities/ActivityToaster.vue";
 
 export default Vue.extend({
@@ -48,7 +48,7 @@ export default Vue.extend({
       try {
         const token = window.localStorage.getItem('authToken')
         if (token) {
-          MONS.defaults.headers.Authorization = token
+          NOTARY.defaults.headers.Authorization = token
         }
         await this.getProfile()
         await this.getStatics()

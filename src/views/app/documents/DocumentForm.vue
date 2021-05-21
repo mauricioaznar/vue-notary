@@ -384,7 +384,7 @@
 import Vue from 'vue';
 import StepperLayout from '@/components/forms/StepperLayout.vue';
 import VeeTextField from '@/components/forms/VeeTextField.vue'
-import {MONS} from '@/api/MONS'
+import {NOTARY} from '@/api/NOTARY'
 import {Documents} from '@/models/Documents'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import VeeDate from '@/components/forms/VeeDate.vue'
@@ -435,6 +435,7 @@ export default Vue.extend({
         publicRegistryEntryDate: '',
         entryUsers: [],
         closureUsers: [],
+        property: '',
         documentComments: [],
         documentProperties: []
       },
@@ -512,7 +513,7 @@ export default Vue.extend({
       if (this.id) {
         try {
           this.loading = true
-          const result = await MONS.get(`documents/${this.id}`)
+          const result = await NOTARY.get(`documents/${this.id}`)
           const document = result.data as Documents
           this.initialDocument = result.data as Documents
           this.document.folio = document.folio
@@ -528,6 +529,7 @@ export default Vue.extend({
           this.document.operations = document.operations
           this.document.groups = document.groups
           this.document.grantors = document.grantors
+          console.log(document.property)
           this.document.property = document.property
           this.document.marginalNotes = document.marginalNotes
           this.document.personalities = document.personalities
@@ -558,9 +560,9 @@ export default Vue.extend({
         try {
           this.disabled = true
           if (this.id) {
-            await MONS.patch(`documents/${this.id}`, documentData)
+            await NOTARY.patch(`documents/${this.id}`, documentData)
           } else {
-            await MONS.post(`documents`, documentData)
+            await NOTARY.post(`documents`, documentData)
           }
           this.$router.push({
             name: 'Documents'
