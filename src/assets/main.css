@@ -1,0 +1,5 @@
+.row-pointer tbody tr :hover{
+    cursor: pointer
+}
+
+html { overflow-y: auto }
