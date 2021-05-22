@@ -4,17 +4,17 @@
   />
   <form-layout
       v-else
-      title="Cliente"
+      title="Client"
       @save:form="save"
       :disabled="saving"
   >
     <vee-text-field
-        name="Nombre"
+        name="Name"
         rules="required"
         v-model="client.name"
     />
     <vee-text-field
-        name="Apellido"
+        name="Last name"
         rules="required"
         v-model="client.lastname"
     />
@@ -24,7 +24,7 @@
         v-model="client.email"
     />
     <vee-autocomplete
-        name="Otorgantes"
+        name="Grantors"
         :items="grantors"
         v-model="client.grantors"
         multiple
@@ -48,7 +48,7 @@
 import Vue from 'vue'
 import FormLayout from '@/components/forms/FormLayout.vue'
 import VeeTextField from '@/components/forms/VeeTextField.vue'
-import {mapActions, mapState} from 'vuex'
+import {mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
 import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'

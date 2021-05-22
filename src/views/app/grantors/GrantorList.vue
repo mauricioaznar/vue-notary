@@ -1,7 +1,7 @@
 <template>
   <advanced-pagination-table
       entity-url="grantors"
-      title="Otorgantes"
+      title="Grantors"
       :headers="headers"
       banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
       edit-route-name="GrantorsEdit"

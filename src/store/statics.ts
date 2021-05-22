@@ -1,7 +1,7 @@
 import {ActionTree, MutationTree} from 'vuex'
 import {NOTARY} from '@/api/NOTARY'
 
-class State {
+export class State {
 	rooms = []
 	users = []
 	clients = []

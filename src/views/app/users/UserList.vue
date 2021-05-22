@@ -1,7 +1,7 @@
 <template>
   <simple-pagination-table
       entity-url="users"
-      title="Usuarios"
+      title="Users"
       :headers="headers"
       banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
       edit-route-name="UsersEdit"
@@ -20,19 +20,19 @@ export default Vue.extend({
     headers: function () {
       return [
         {
-          text: 'Nombre',
+          text: 'Name',
           value: 'name',
           width: '30%',
           sortable: false
         },
         {
-          text: 'Apellidos',
+          text: 'Last name',
           value: 'lastname',
           width: '30%',
           sortable: false
         },
         {
-          text: 'Grupos',
+          text: 'Groups',
           value: 'groups',
           width: '30%',
           formatter: (groups) => {
@@ -40,7 +40,7 @@ export default Vue.extend({
           }
         },
         {
-          text: 'Rol',
+          text: 'Role',
           value: 'role.name',
           width: '30%',
           sortable: false

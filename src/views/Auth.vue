@@ -5,15 +5,15 @@
       @save:form="save"
     >
       <vee-text-field
-          name="Contraseña"
+          name="Password"
           rules="required|min:10"
           v-model="password1"
       />
       <vee-text-field
-          name="Contraseña (repetir)"
-          rules="required|confirmed:Contraseña"
+          name="Password (repeat)"
+          rules="required|confirmed:Password"
           v-model="password2"
-          hint="Repetir la contraseña igual que en el anterior campo"
+          hint="Password must be the same as the previous field"
       />
     </form-layout>
     <error-toaster

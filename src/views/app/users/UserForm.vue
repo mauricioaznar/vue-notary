@@ -9,12 +9,12 @@
       :disabled="saving"
   >
     <vee-text-field
-        name="Nombre"
+        name="Name"
         rules="required"
         v-model="user.name"
     />
     <vee-text-field
-        name="Apellidos"
+        name="Last name"
         rules="required"
         v-model="user.lastname"
     />
@@ -24,7 +24,7 @@
         v-model="user.email"
     />
     <vee-autocomplete
-        name="Rol"
+        name="Role"
         :items="roles"
         v-model="user.roleId"
         item-text="name"
@@ -32,7 +32,7 @@
         rules="required"
     />
     <vee-autocomplete
-        name="Grupos"
+        name="Groups"
         :items="groups"
         v-model="user.groups"
         multiple
@@ -44,16 +44,16 @@
     </vee-autocomplete>
     <vee-text-field
         v-if="!this.isEditMode"
-        name="Contraseña"
+        name="Password"
         rules="required|min:10"
         v-model="user.password1"
     />
     <vee-text-field
         v-if="!this.isEditMode"
-        name="Contraseña (repetir)"
-        rules="required|confirmed:Contraseña"
+        name="Password (repeat)"
+        rules="required|confirmed:Password"
         v-model="user.password2"
-        hint="Repetir la contraseña igual que en el anterior campo"
+        hint="Password must be the same as the previous field"
     />
 
     <v-row

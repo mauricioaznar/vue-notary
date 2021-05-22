@@ -3,16 +3,16 @@
     <v-row align="center">
       <v-col cols="auto">
         <h1>
-          Citas
+          Appointments
         </h1>
       </v-col>
       <v-spacer/>
       <v-col>
         <vee-date
-            label=Fecha seleccionada
+            label="Date"
             v-model="selectedDate"
             no-label
-            name="Fecha seleccionada"
+            name="Selected date"
         >
         </vee-date>
       </v-col>
@@ -98,7 +98,7 @@
             </p>
             <v-divider />
             <p class="mt-4 mb-2">
-              Usuarios:
+              Users:
             </p>
             <ul class="mb-4">
               <li
@@ -110,7 +110,7 @@
             </ul>
             <v-divider />
             <p class="mt-4 mb-2">
-              Clientes
+              Clients:
             </p>
             <ul>
 
@@ -154,6 +154,8 @@ import {dateFormat, dateTimeFormat} from '@/helpers/dateFormats'
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {formatTime} from '@/helpers/date-formats'
+import {mapState} from "vuex";
+import {State as StaticState} from "@/store/statics";
 
 
 interface SyntheticEvent {
@@ -182,14 +184,6 @@ export default Vue.extend({
       events: [] as any[],
       fetchError: {},
       deleteError: {},
-      rooms: [
-        'Bancos',
-        'Sala cuadrada',
-        'Sala rectangular',
-        'Privados jefes',
-        'Privados independientes',
-        'Firmas externas'
-      ],
       colors: ['blue', 'red', 'deep-purple', 'green', 'brown', 'orange', 'grey darken-1'],
       selectedEvent: {} as { data: {} },
       selectedAppointment: null as Appointment | null,
@@ -209,6 +203,11 @@ export default Vue.extend({
         }
       }
     }
+  },
+  computed: {
+    ...mapState('statics', {
+      rooms: (state: StaticState) => state.rooms.map(room => room.name),
+    }),
   },
   mounted() {
     (this.$refs.calendar as Vue & { checkChange: () => void }).checkChange()

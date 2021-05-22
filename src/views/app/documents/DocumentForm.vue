@@ -12,14 +12,14 @@
     >
       <template slot="step-1">
         <vee-date
-            name="Fecha"
+            name="Date"
             rules="required"
             v-model="document.date"
             :disabled="!isEditable"
         />
         <vee-text-field
-            name="Numero de archivo"
             rules="required"
+            name="File number"
             v-model="document.fileNumber"
             :disabled="!isEditable"
         />
@@ -35,7 +35,7 @@
             :disabled="!isEditable"
         />
         <vee-text-field
-            name="Tomo"
+            name="Tome"
             :rules="{
               required: true,
               regex: /^[0-9]+([-][0-9]+)?$/
@@ -45,7 +45,7 @@
             :disabled="!isEditable"
         />
         <vee-autocomplete
-            name="Lavado de dinero"
+            name="Money laundering"
             :items="tripleBooleanOptions"
             v-model="document.moneyLaundering"
             item-text="text"
@@ -64,7 +64,7 @@
         </vee-autocomplete>
         <vee-date
             v-show="document.moneyLaundering !== -1"
-            name="Fecha de lavado de dinero"
+            name="Money laundering date"
             :rules="{
                required: document.moneyLaundering !== -1
             }"
@@ -73,7 +73,7 @@
             :disabled="!isEditable"
         />
         <vee-autocomplete
-            name="Tipo de documento"
+            name="Document type"
             :items="documentTypes"
             v-model="document.documentTypeId"
             item-text="name"
@@ -82,7 +82,7 @@
             :disabled="!isEditable"
         />
         <vee-autocomplete
-            name="Status del documento"
+            name="Document status"
             :items="documentStatuses"
             v-model="document.documentStatusId"
             item-text="name"
@@ -93,7 +93,7 @@
       </template>
       <template slot="step-2">
         <vee-autocomplete
-            name="Cliente"
+            name="Client"
             :items="clients"
             v-model="document.clientId"
             item-text="name"
@@ -102,7 +102,7 @@
             :disabled="!isEditable"
         />
         <vee-autocomplete
-            name="Operaciones"
+            name="Operations"
             :items="filteredOperations"
             v-model="document.operations"
             multiple
@@ -113,7 +113,7 @@
         >
         </vee-autocomplete>
         <vee-autocomplete
-            name="Otorgantes"
+            name="Grantors"
             :items="grantors"
             v-model="document.grantors"
             multiple
@@ -124,7 +124,7 @@
         >
         </vee-autocomplete>
         <vee-autocomplete
-            name="Grupos"
+            name="Groups"
             :items="groups"
             v-model="document.groups"
             multiple
@@ -140,13 +140,13 @@
             :disabled="!isEditable"
         />
         <vee-date
-            name="Fecha de entrada al registro publico"
+            name="Public registry entry date"
             rules="required"
             v-model="document.publicRegistryEntryDate"
             :disabled="!isEditable"
         />
         <vee-date
-            name="Fecha de salida al registro publico"
+            name="Public registry exit date"
             rules="required"
             v-model="document.publicRegistryExitDate"
             :disabled="!isEditable"
@@ -154,7 +154,7 @@
       </template>
       <template slot="step-3">
         <vee-autocomplete
-            name="Documentos adjuntos"
+            name="Document attachments"
             :items="filteredAttachments"
             v-model="document.attachments"
             multiple
@@ -169,7 +169,7 @@
             <thead>
             <tr>
               <th class="text-left">
-                Document adjunto
+                Document attachment
               </th>
               <th class="text-left">
                 Status
@@ -193,7 +193,7 @@
           </template>
         </v-simple-table>
         <vee-autocomplete
-            name="Abogados de inicio"
+            name="Entry users"
             :items="users"
             v-model="document.entryUsers"
             multiple
@@ -204,7 +204,7 @@
         >
         </vee-autocomplete>
         <vee-autocomplete
-            name="Abogados de fin"
+            name="Closure users"
             :items="users"
             v-model="document.closureUsers"
             multiple
@@ -219,10 +219,10 @@
             <thead>
             <tr>
               <th class="text-left" style="width: 40%">
-                Predio
+                Property
               </th>
               <th class="text-left" style="width: 40%">
-                Folio electronico
+                Electronic folio
               </th>
               <th class="text-left" style="width: 10%">
                 <v-btn
@@ -246,7 +246,7 @@
             >
               <td>
                 <vee-text-field
-                    :name="`Propiedad - ${index + 1}`"
+                    :name="`Property - ${index + 1}`"
                     v-model="documentProperty.property"
                     no-label
                     rules="required"
@@ -255,7 +255,7 @@
               </td>
               <td>
                 <vee-text-field
-                    :name="`Folio electronico - ${index + 1}`"
+                    :name="`Electronic folio - ${index + 1}`"
                     v-model="documentProperty.electronicFolio"
                     no-label
                     type="number"
@@ -282,63 +282,8 @@
         </v-simple-table>
       </template>
       <template slot="step-4">
-        <vee-autocomplete
-            name="Notas marginales"
-            rules="required"
-            v-model="document.marginalNotes"
-            :items="tripleBooleanOptions"
-            item-text="text"
-            item-value="value"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
-        <vee-autocomplete
-            name="Document Registry"
-            rules="required"
-            v-model="document.documentRegistry"
-            :items="tripleBooleanOptions"
-            item-text="text"
-            item-value="value"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
-        <vee-autocomplete
-            name="Identificaciones"
-            rules="required"
-            :items="tripleBooleanOptions"
-            v-model="document.identifications"
-            item-text="text"
-            item-value="value"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
-        <vee-autocomplete
-            name="Personalidades"
-            rules="required"
-            :items="tripleBooleanOptions"
-            v-model="document.personalities"
-            item-text="text"
-            item-value="value"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
-        <vee-autocomplete
-            name="Patente del registro publico"
-            rules="required"
-            :items="tripleBooleanOptions"
-            v-model="document.publicRegistryPatent"
-            item-text="text"
-            item-value="value"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
         <vee-text-field
-            name="Otro tipo de documento"
-            v-model="document.documentTypeOther"
-            :disabled="!isEditable"
-        />
-        <vee-text-field
-            name="Comentario"
+            name="Comment"
             v-model="comment"
             append-icon="mdi-plus"
             @click:append="addComment"
@@ -350,7 +295,7 @@
             <thead>
             <tr>
               <th class="text-left">
-                Comentarios
+                Comments
               </th>
             </tr>
             </thead>
@@ -393,10 +338,6 @@ import {mapState} from 'vuex'
 import VeeCheckbox from '@/components/forms/VeeCheckbox.vue'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 
-
-// TODO
-// document comments
-// document properties
 export default Vue.extend({
   components: {
     LoaderSimple,
@@ -457,9 +398,9 @@ export default Vue.extend({
         }
       ],
       tripleBooleanOptions: [
-        { value: 1, text: 'Completado' },
-        { value: 0, text: 'Incompleto' },
-        { value: -1, text: 'No aplica' }
+        { value: 1, text: 'Complete' },
+        { value: 0, text: 'Incomplete' },
+        { value: -1, text: 'Doesnt apply' }
       ],
       fetchError: {},
       saveError: {},
@@ -529,7 +470,6 @@ export default Vue.extend({
           this.document.operations = document.operations
           this.document.groups = document.groups
           this.document.grantors = document.grantors
-          console.log(document.property)
           this.document.property = document.property
           this.document.marginalNotes = document.marginalNotes
           this.document.personalities = document.personalities

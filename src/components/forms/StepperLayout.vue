@@ -23,8 +23,8 @@
            ]"
             :editable="true"
         >
-          Paso {{ index + 1 }}
-          <small v-if="item.optional">Opcional</small>
+          Step {{ index + 1 }}
+          <small v-if="item.optional">Optional</small>
         </v-stepper-step>
         <v-stepper-content
             :key="`${index + 1}-content`"
@@ -42,7 +42,7 @@
                 <v-row justify="end" class="my-6">
                   <v-col cols="auto">
                     <v-btn text @click="previousStep(index + 1)">
-                      Atras
+                      Previous step
                     </v-btn>
                   </v-col>
                   <v-col cols="auto">
@@ -51,7 +51,7 @@
                         @click="nextStep(index + 1)"
                         :disabled="disabled"
                     >
-                      Continuar
+                      {{ steps.length === index + 1 ? 'Finish' : 'Next step'}}
                     </v-btn>
                   </v-col>
                 </v-row>

@@ -4,17 +4,17 @@
   />
   <form-layout
       v-else
-      title="Grupo"
+      title="Group"
       @save:form="save"
       :disabled="saving"
   >
     <vee-text-field
-        name="Nombre"
+        name="Name"
         rules="required"
         v-model="group.name"
     />
     <vee-autocomplete
-        name="Usuario lider"
+        name="Leader user"
         :items="users"
         v-model="group.userId"
         item-text="name"
@@ -22,7 +22,7 @@
         rules="required"
     />
     <vee-autocomplete
-        name="Usuarios"
+        name="Users"
         :items="users"
         v-model="group.users"
         multiple
@@ -47,7 +47,7 @@
 import Vue from 'vue'
 import FormLayout from '@/components/forms/FormLayout.vue'
 import VeeTextField from '@/components/forms/VeeTextField.vue'
-import {mapActions, mapState} from 'vuex'
+import {mapState} from 'vuex'
 import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
 import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'

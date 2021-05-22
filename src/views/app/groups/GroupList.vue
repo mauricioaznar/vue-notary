@@ -1,7 +1,7 @@
 <template>
   <simple-pagination-table
       entity-url="groups"
-      title="Grupos"
+      title="Groups"
       :headers="headers"
       banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
       edit-route-name="GroupsEdit"
@@ -19,7 +19,7 @@ export default Vue.extend({
     headers: function () {
       return [
         {
-          text: 'Nombre',
+          text: 'Name',
           value: 'name',
           width: '30%',
           sortable: false

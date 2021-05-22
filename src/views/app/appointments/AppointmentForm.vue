@@ -4,41 +4,41 @@
   />
   <form-layout
       v-else
-      title="Cita"
+      title="Appointment"
       @save:form="save"
       :disabled="saving || !isEditable"
   >
     <vee-text-field
-        name="Nombre"
+        name="Name"
         rules="required"
         v-model="appointment.name"
         :disabled="!isEditable"
     />
     <vee-text-field
-        name="Descripción"
+        name="Description"
         v-model="appointment.description"
         :disabled="!isEditable"
     />
     <vee-date
         v-model="appointment.date"
-        name="Fecha"
+        name="Date"
         rules="required"
         :disabled="!isEditable"
     />
     <vee-time
-        name="Tiempo de inicio"
+        name="Initial date"
         rules="required"
         v-model="appointment.startTime"
         :disabled="!isEditable"
     />
     <vee-time
-        name="Tiempo de fin"
-        rules="required|after:@Tiempo de inicio"
+        name="End date"
+        rules="required|after:@Initial date"
         v-model="appointment.endTime"
         :disabled="!isEditable"
     />
     <vee-autocomplete
-        name="Sala"
+        name="Room"
         :items="rooms"
         v-model="appointment.roomId"
         item-text="name"
@@ -48,7 +48,7 @@
     >
     </vee-autocomplete>
     <vee-autocomplete
-        name="Clientes"
+        name="Clients"
         :items="clients"
         v-model="appointment.clients"
         multiple
@@ -60,7 +60,7 @@
     >
     </vee-autocomplete>
     <vee-autocomplete
-        name="Usuarios"
+        name="Users"
         :items="users"
         v-model="appointment.users"
         multiple
@@ -94,11 +94,8 @@ import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {Appointment} from '@/models/Appointment'
-import {
-  datePickerDateFormat,
-  timePickerTimeFormat} from '@/helpers/dateFormats'
+import {datePickerDateFormat, timePickerTimeFormat} from '@/helpers/dateFormats'
 import moment from 'moment'
-import {Documents} from '@/models/Documents'
 
 export default Vue.extend({
   components: {

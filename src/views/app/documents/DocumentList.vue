@@ -53,13 +53,13 @@ export default Vue.extend({
           sortable: false
         },
         {
-          text: 'Tomo',
+          text: 'Tome',
           value: 'tome',
           width: '15%',
           sortable: false
         },
         {
-          text: 'Tipo de documento',
+          text: 'Document type',
           value: 'documentType.name',
           width: '15%',
           sortable: false
@@ -71,13 +71,13 @@ export default Vue.extend({
           sortable: false
         },
         {
-          text: 'Cliente',
+          text: 'Client',
           value: 'client.name',
           width: '15%',
           sortable: false
         },
         {
-          text: 'Grupos',
+          text: 'Group',
           value: 'groups',
           width: '15%',
           formatter: function (value) {

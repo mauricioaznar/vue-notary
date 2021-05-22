@@ -1,6 +1,6 @@
 <template>
   <dialog-layout
-      title="Ingresar"
+      title="Log in"
       @submit="handleSubmit"
       v-model="activateDialog"
   >
@@ -19,7 +19,7 @@
         name="password"
         v-model="credentials.password "
         rules="required"
-        label="Contraseña"
+        label="Password"
         id="password"
         type="password"
         no-label

@@ -74,44 +74,44 @@
               to="/"
               exact
           >
-            <v-list-item-title>Inicio</v-list-item-title>
+            <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
           <v-list-item
               to="/documents"
           >
-            <v-list-item-title>Documentos</v-list-item-title>
+            <v-list-item-title>Documents</v-list-item-title>
           </v-list-item>
 
           <v-list-item
               to="/appointments"
           >
-            <v-list-item-title>Citas</v-list-item-title>
+            <v-list-item-title>Appointments</v-list-item-title>
           </v-list-item>
 
           <v-list-item
               to="/clients"
           >
-            <v-list-item-title>Clientes</v-list-item-title>
+            <v-list-item-title>Clients</v-list-item-title>
           </v-list-item>
 
           <v-list-item
               to="/grantors"
               exact
           >
-            <v-list-item-title>Otorgantes</v-list-item-title>
+            <v-list-item-title>Grantors</v-list-item-title>
           </v-list-item>
           <v-list-item
               to="/users"
               exact
           >
-            <v-list-item-title>Usuarios</v-list-item-title>
+            <v-list-item-title>Users</v-list-item-title>
           </v-list-item>
           <v-list-item
               to="/groups"
               exact
           >
-            <v-list-item-title>Grupos</v-list-item-title>
+            <v-list-item-title>Groups</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -122,7 +122,7 @@
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              Cerrar sesión
+              Log out
             </v-list-item-title>
           </v-list-item>
         </v-list>
