@@ -134,11 +134,6 @@
             :disabled="!isEditable"
         >
         </vee-autocomplete>
-        <vee-text-field
-            name="Predio"
-            v-model="document.property"
-            :disabled="!isEditable"
-        />
         <vee-date
             name="Public registry entry date"
             rules="required"
@@ -214,72 +209,6 @@
             :disabled="!isEditable"
         >
         </vee-autocomplete>
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-            <tr>
-              <th class="text-left" style="width: 40%">
-                Property
-              </th>
-              <th class="text-left" style="width: 40%">
-                Electronic folio
-              </th>
-              <th class="text-left" style="width: 10%">
-                <v-btn
-                  small
-                  icon
-                  rounded
-                  @click="addDocumentProperty"
-                  :disabled="!isEditable"
-                >
-                  <v-icon>
-                    mdi-plus
-                  </v-icon>
-                </v-btn>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr
-                v-for="(documentProperty, index) in document.documentProperties"
-                :key="index"
-            >
-              <td>
-                <vee-text-field
-                    :name="`Property - ${index + 1}`"
-                    v-model="documentProperty.property"
-                    no-label
-                    rules="required"
-                    :disabled="!isEditable"
-                />
-              </td>
-              <td>
-                <vee-text-field
-                    :name="`Electronic folio - ${index + 1}`"
-                    v-model="documentProperty.electronicFolio"
-                    no-label
-                    type="number"
-                    rules="required|integer"
-                    :disabled="!isEditable"
-                />
-              </td>
-              <td>
-                <v-btn
-                    small
-                    icon
-                    rounded
-                    @click="() => { removeDocumentProperty(index) }"
-                    :disabled="!isEditable"
-                >
-                  <v-icon>
-                    mdi-delete
-                  </v-icon>
-                </v-btn>
-              </td>
-            </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
       </template>
       <template slot="step-4">
         <vee-text-field
