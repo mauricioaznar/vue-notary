@@ -35,6 +35,9 @@
             :items-per-page="itemsPerPage"
             :options.sync="options"
             disable-sort
+            :expanded="expanded"
+            :single-expand="true"
+            :show-expand="showExpand"
             :footer-props="{
               'items-per-page-options': [10, 20, 30, 40, 50],
               'items-per-page-text': ''
@@ -99,6 +102,13 @@
               </slot>
             </v-row>
           </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <slot name="expanded-item" :item="item">
+
+              </slot>
+            </td>
+          </template>
         </v-data-table>
       </v-col>
       <confirm-dialog
@@ -158,6 +168,12 @@ export default {
       default: function () {
         return {}
       }
+    },
+    showExpand: {
+      type: Boolean,
+      default: function () {
+        return false
+      }
     }
   },
   data () {
@@ -172,6 +188,7 @@ export default {
       confirmDialog: false,
       customFetchError: {},
       deleteError: {},
+      expanded: []
     }
   },
   sockets: {
@@ -207,7 +224,6 @@ export default {
         ])
         const response1 = responses[0]
         if (response1.data) {
-          console.log(response1.data)
           this.totalItems = response1.data.total
           this.items = response1.data.results
         }

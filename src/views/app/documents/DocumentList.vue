@@ -1,28 +1,74 @@
 <template>
-    <advanced-pagination-table
-        entity-url="documents"
-        :title="'Documents'"
-        :headers="headers"
-        banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-        edit-route-name="DocumentsEdit"
-        create-route-name="DocumentsNew"
-        :fetch-params="{
+  <advanced-pagination-table
+      entity-url="documents"
+      :title="'Documents'"
+      :headers="headers"
+      banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+      edit-route-name="DocumentsEdit"
+      create-route-name="DocumentsNew"
+      show-expand
+
+      :fetch-params="{
            search: search,
            year: dates.year,
         }"
-    >
-      <template slot="extension">
-        <date-tabs
-            :dates.sync="dates"
-        />
-      </template>
-      <template slot="toolbar">
-        <v-text-field
-            v-model="search"
-            hide-details
-        />
-      </template>
-    </advanced-pagination-table>
+  >
+    <template slot="extension">
+      <date-tabs
+          :dates.sync="dates"
+      />
+    </template>
+    <template slot="toolbar">
+      <v-text-field
+          v-model="search"
+          hide-details
+      />
+    </template>
+    <template v-slot:expanded-item="{ item }">
+      <v-container>
+        <v-row justify="center">
+          <v-col sm="12" md="6">
+            <document-comments
+                :comments="item.documentComments"
+            />
+          </v-col>
+          <v-col sm="12" md="6">
+            <v-toolbar dense>
+              <v-toolbar-title>Attachments</v-toolbar-title>
+
+              <v-spacer></v-spacer>
+            </v-toolbar>
+            <div>
+              <v-simple-table>
+                <template slot="default">
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        Attachment name
+                      </th>
+                      <th class="text-left">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="attachment in item.documentAttachments" :key="attachment.id">
+                      <td>
+                        {{ documentAttachments.find( documentAttachment => documentAttachment.id === attachment.id).name }}
+                      </td>
+                      <td>
+                        <v-simple-checkbox :value="attachment.attachmentStatus === 1" :ripple="false" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </template>
+  </advanced-pagination-table>
 </template>
 
 <script lang="ts">
@@ -30,10 +76,12 @@ import Vue from 'vue'
 import {getCurrentMonth, getCurrentYear} from "@/helpers/date-formats";
 import AdvancedPaginationTable from "@/components/tables/AdvancedPaginationTable.vue";
 import DateTabs from "@/components/tabs/DateTabs.vue";
+import DocumentComments from "@/views/app/documents/DocumentComments.vue";
+import {mapState} from "vuex";
 
 
 export default Vue.extend({
-  components: {DateTabs, AdvancedPaginationTable},
+  components: {DocumentComments, DateTabs, AdvancedPaginationTable},
   data() {
     return {
       search: '',
@@ -44,6 +92,7 @@ export default Vue.extend({
     }
   },
   computed: {
+    ...mapState('statics', ['documentAttachments']),
     headers: function () {
       return [
         {
