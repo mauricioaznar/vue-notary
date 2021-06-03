@@ -1,72 +1,75 @@
 <template>
-  <validation-observer
-    ref="obs"
-  >
-    <v-stepper
-        v-model="e1"
-        vertical
-        class="mau-stepper elevation-0 pa-0"
+  <custom-container>
+    <validation-observer
+        ref="obs"
     >
-      <validation-observer
-          v-for="(item, index) in steps"
-          :key="index + 1"
-          :ref="`step-${index + 1}`"
-          v-slot="props"
-          tag="div"
+      <v-stepper
+          v-model="e1"
+          vertical
+          class="mau-stepper elevation-0 pa-0"
       >
-        <v-stepper-step
+        <validation-observer
+            v-for="(item, index) in steps"
             :key="index + 1"
-            :complete="props.valid"
-            :step="index + 1"
-            :rules="[() =>
+            :ref="`step-${index + 1}`"
+            v-slot="props"
+            tag="div"
+        >
+          <v-stepper-step
+              :key="index + 1"
+              :complete="props.valid"
+              :step="index + 1"
+              :rules="[() =>
             (Object.values(props.errors)).every(err => err.length === 0)
            ]"
-            :editable="true"
-        >
-          Step {{ index + 1 }}
-          <small v-if="item.optional">Optional</small>
-        </v-stepper-step>
-        <v-stepper-content
-            :key="`${index + 1}-content`"
-            :step="index + 1"
-        >
-          <v-container>
-            <v-row justify="center">
-              <v-col sm=12 md="9">
-                <v-card
-                    class="pa-3"
-                    outlined
-                >
-                  <slot :name="`step-${index + 1}`"/>
-                </v-card>
-                <v-row justify="end" class="my-6">
-                  <v-col cols="auto">
-                    <v-btn text @click="previousStep(index + 1)">
-                      Previous step
-                    </v-btn>
-                  </v-col>
-                  <v-col cols="auto">
-                    <v-btn
-                        color="primary"
-                        @click="nextStep(index + 1)"
-                        :disabled="disabled"
-                    >
-                      {{ steps.length === index + 1 ? 'Finish' : 'Next step'}}
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-stepper-content>
-      </validation-observer>
-    </v-stepper>
-  </validation-observer>
+              :editable="true"
+          >
+            Step {{ index + 1 }}
+            <small v-if="item.optional">Optional</small>
+          </v-stepper-step>
+          <v-stepper-content
+              :key="`${index + 1}-content`"
+              :step="index + 1"
+          >
+            <v-container>
+              <v-row justify="center">
+                <v-col sm=12 md="9">
+                  <v-card
+                      class="pa-3"
+                      outlined
+                  >
+                    <slot :name="`step-${index + 1}`"/>
+                  </v-card>
+                  <v-row justify="end" class="my-6">
+                    <v-col cols="auto">
+                      <v-btn text @click="previousStep(index + 1)">
+                        Previous step
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="auto">
+                      <v-btn
+                          color="primary"
+                          @click="nextStep(index + 1)"
+                          :disabled="disabled"
+                      >
+                        {{ steps.length === index + 1 ? 'Finish' : 'Next step'}}
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-stepper-content>
+        </validation-observer>
+      </v-stepper>
+    </validation-observer>
+  </custom-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import {ValidationObserver} from "vee-validate";
+import CustomContainer from "@/components/layouts/CustomContainer.vue";
 
 export default Vue.extend({
   data() {
@@ -75,6 +78,7 @@ export default Vue.extend({
     }
   },
   components: {
+    CustomContainer,
     ValidationObserver,
   },
   props: {

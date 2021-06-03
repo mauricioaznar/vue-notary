@@ -82,21 +82,27 @@
 
 
           <template v-slot:item.actions="{ item }">
-            <v-row>
-              <v-btn
-                  small
-                  icon
-                  @click="() => {editItem( item )}"
-              >
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <v-btn
-                  small
-                  icon
-                  @click="confirmDialog = true; selectedItem = item"
-              >
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
+            <v-row dense class="flex-nowrap">
+              <v-col>
+                <v-btn
+                    small
+                    icon
+                    elevation="6"
+                    @click="() => {editItem( item )}"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn
+                    small
+                    icon
+                    elevation="6"
+                    @click="confirmDialog = true; selectedItem = item"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </v-col>
               <slot name="actions" :item="item">
 
               </slot>
@@ -203,6 +209,7 @@ export default {
       return [
           ...this.headers,
         {
+          width: '10%',
           text: 'Acciones',
           value: 'actions'
         }

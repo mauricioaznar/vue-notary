@@ -24,12 +24,27 @@
           hide-details
       />
     </template>
+    <template v-slot:actions={item}>
+      <v-col>
+        <v-btn
+            elevation="6s"
+            icon
+            small
+            @click="console.log(item)"
+        >
+          <v-icon>
+            mdi-comment
+          </v-icon>
+        </v-btn>
+      </v-col>
+    </template>
     <template v-slot:expanded-item="{ item }">
       <v-container>
         <v-row justify="center">
           <v-col sm="12" md="6">
             <document-comments
                 :comments="item.documentComments"
+                :document-id="item.id"
             />
           </v-col>
           <v-col sm="12" md="6">
@@ -76,8 +91,8 @@ import Vue from 'vue'
 import {getCurrentMonth, getCurrentYear} from "@/helpers/date-formats";
 import AdvancedPaginationTable from "@/components/tables/AdvancedPaginationTable.vue";
 import DateTabs from "@/components/tabs/DateTabs.vue";
-import DocumentComments from "@/views/app/documents/DocumentComments.vue";
 import {mapState} from "vuex";
+import DocumentComments from "@/views/app/documentComments/DocumentComments.vue";
 
 
 export default Vue.extend({

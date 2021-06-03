@@ -7,32 +7,50 @@
           max-width="600px"
       >
         <v-card>
-          <v-card-title>
-            <span class="headline">{{title}}</span>
-          </v-card-title>
+          <v-toolbar
+            dark
+            color="primary"
+            class="mb-6"
+          >
+            <v-btn
+              v-if="showClose"
+              icon
+              @click="dialog = false"
+            >
+              <v-icon>
+                mdi-close
+              </v-icon>
+            </v-btn>
+            <v-toolbar-title>{{title}}</v-toolbar-title>
+            <v-spacer />
+          </v-toolbar>
           <v-card-text>
             <v-container>
-              <slot />
+              <slot></slot>
             </v-container>
-            <small>*indicates required field</small>
           </v-card-text>
           <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                v-if="showClose"
-                color="blue darken-1"
-                text
-                @click="dialog = false"
-            >
-              Cerrar
-            </v-btn>
-            <v-btn
-                color="blue darken-1"
-                text
-                @click="save"
-            >
-              Enviar
-            </v-btn>
+            <v-row justify="end" class="my-6">
+              <v-col cols="3">
+                <v-btn
+                    v-if="showClose"
+                    color="blue darken-1"
+                    text
+                    @click="dialog = false"
+                >
+                  Cancel
+                </v-btn>
+              </v-col>
+              <v-col cols="3">
+                <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="save"
+                >
+                  Submit
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -52,6 +70,7 @@ export default (Vue as VueConstructor<
   };
 }
   >).extend({
+  name: 'DialogLayout',
   data() {
     return {
       dialog: false

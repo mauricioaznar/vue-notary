@@ -257,7 +257,7 @@
 
 import Vue from 'vue';
 import StepperLayout from '@/components/forms/StepperLayout.vue';
-import VeeTextField from '@/components/forms/VeeTextField.vue'
+import VeeTextField from '@/components/forms/VeeTextField.vue';
 import {NOTARY} from '@/api/NOTARY'
 import {Documents} from '@/models/Documents'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
