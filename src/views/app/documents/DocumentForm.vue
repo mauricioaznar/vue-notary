@@ -3,11 +3,12 @@
     <loader-simple
         v-if="loading"
     />
-    <stepper-layout
+    <horizontal-stepper-layout
         v-if="!loading"
         :steps="steps"
         @submit="save"
         :disabled="saving || !this.isEditable"
+        :is-sequential="!editMode"
         title="Stepper form"
     >
       <template slot="step-1">
@@ -241,7 +242,7 @@
           </template>
         </v-simple-table>
       </template>
-    </stepper-layout>
+    </horizontal-stepper-layout>
     <ErrorToaster
         v-model="fetchError"
         @relogin="customFetch"
@@ -256,7 +257,6 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import StepperLayout from '@/components/forms/StepperLayout.vue';
 import VeeTextField from '@/components/forms/VeeTextField.vue';
 import {NOTARY} from '@/api/NOTARY'
 import {Documents} from '@/models/Documents'
@@ -266,16 +266,17 @@ import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
 import {mapState} from 'vuex'
 import VeeCheckbox from '@/components/forms/VeeCheckbox.vue'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
+import HorizontalStepperLayout from "@/components/forms/HorizontalStepperLayout.vue";
 
 export default Vue.extend({
   components: {
+    HorizontalStepperLayout,
     LoaderSimple,
     VeeCheckbox,
     VeeDate,
     VeeAutocomplete,
     ErrorToaster,
     VeeTextField,
-    StepperLayout
   },
   data () {
     return {
@@ -311,21 +312,6 @@ export default Vue.extend({
       },
       comment: '',
       initialDocument: null as Documents | null,
-      steps: [
-        {
-          title: 'Step 1'
-        },
-        {
-          title: 'Step 2'
-        },
-        {
-          title: 'Step 3'
-        },
-        {
-          title: 'Optional step',
-          optional: true
-        }
-      ],
       tripleBooleanOptions: [
         { value: 1, text: 'Complete' },
         { value: 0, text: 'Incomplete' },
@@ -356,6 +342,32 @@ export default Vue.extend({
       'documentAttachments',
       'users'
     ]),
+    editMode: function () {
+      return !!this.id
+    },
+    steps: function () {
+      const steps = [
+        {
+          title: 'Step 1',
+          optional: false,
+        },
+        {
+          title: 'Step 2',
+          optional: false,
+        },
+        {
+          title: 'Step 3',
+          optional: false,
+        },
+      ]
+      if(this.editMode) {
+        steps.push({
+          title: 'Comments',
+          optional: true
+        })
+      }
+      return steps
+    },
     filteredOperations: function () {
       return this.documentOperations.filter(operation => {
         return operation.documentTypeOperations.some(documentTypeOperation => {

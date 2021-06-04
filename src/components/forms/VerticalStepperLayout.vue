@@ -5,8 +5,8 @@
     >
       <v-stepper
           v-model="e1"
-          vertical
           class="mau-stepper elevation-0 pa-0"
+          :non-linear="false"
       >
         <validation-observer
             v-for="(item, index) in steps"
@@ -20,11 +20,11 @@
               :complete="props.valid"
               :step="index + 1"
               :rules="[() =>
-            (Object.values(props.errors)).every(err => err.length === 0)
-           ]"
-              :editable="true"
+                (Object.values(props.errors)).every(err => err.length === 0)
+               ]"
+              :editable="!isSequential"
           >
-            Step {{ index + 1 }}
+            {{item.title}}
             <small v-if="item.optional">Optional</small>
           </v-stepper-step>
           <v-stepper-content
@@ -91,6 +91,12 @@ export default Vue.extend({
       required: true
     },
     disabled: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
+    },
+    isSequential: {
       type: Boolean,
       default: () => {
         return false
