@@ -7,13 +7,15 @@
           v-model="e1"
           class="elevation-0 pa-0"
       >
-        <v-stepper-header>
+        <v-stepper-header
+        >
           <v-stepper-step
               v-for="(item, index) in steps"
               :key="index + 1"
+              :color="isStepValid(index + 1) ? 'green' : 'light-blue'"
               :complete="isStepValid(index + 1)"
-              edit-icon="mdi-check"
-              complete-icon="mdi-pencil"
+              :edit-icon="'mdi-pencil'"
+              complete-icon="mdi-check"
               :step="index + 1"
               :rules="hasStepErrors(index + 1)"
               :editable="!isSequential"
@@ -28,6 +30,7 @@
               :key="index + 1"
               :ref="`step-${index + 1}`"
               tag="div"
+              v-slot="props"
           >
             <v-stepper-content
                 :key="`${index + 1}-content`"
@@ -52,7 +55,7 @@
                         <v-btn
                             color="primary"
                             @click="nextStep(index + 1)"
-                            :disabled="disabled"
+                            :disabled="!props.valid"
                         >
                           {{ steps.length === index + 1 ? 'Finish' : 'Next step' }}
                         </v-btn>
@@ -145,12 +148,8 @@ export default Vue.extend({
         const step = ref[0]
         const fields = Object.values(step.fields)
         const isInvalid = fields.some(field => {
-          return (!field.valid && field.changed)
+          return (!field.valid)
         })
-        if (position === 1) {
-          console.log(fields)
-          console.log(isInvalid)
-        }
         return !isInvalid
       } else {
         return true
