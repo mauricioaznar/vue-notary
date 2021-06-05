@@ -40,7 +40,7 @@
                 <v-row justify="center">
                   <v-col sm=12 md="9">
                     <v-card
-                        class="pa-3"
+                        class="px-3 pt-3 pb-12"
                         outlined
                     >
                       <slot :name="`step-${index + 1}`"/>

@@ -212,35 +212,12 @@
         </vee-autocomplete>
       </template>
       <template slot="step-4">
-        <vee-text-field
-            name="Comment"
-            v-model="comment"
-            append-icon="mdi-plus"
-            @click:append="addComment"
-            @keyup.enter="addComment"
-            :disabled="!isEditable"
-        />
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-            <tr>
-              <th class="text-left">
-                Comments
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr
-                v-for="(documentComment, index) in document.documentComments"
-                :key="index"
-            >
-              <td>
-                {{documentComment.comment}}
-              </td>
-            </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <document-comments
+            v-if="editMode"
+            :document-id="id"
+        >
+
+        </document-comments>
       </template>
     </horizontal-stepper-layout>
     <ErrorToaster
@@ -267,6 +244,7 @@ import {mapState} from 'vuex'
 import VeeCheckbox from '@/components/forms/VeeCheckbox.vue'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import HorizontalStepperLayout from "@/components/forms/HorizontalStepperLayout.vue";
+import DocumentComments from "@/views/app/documents/DocumentComments.vue";
 
 export default Vue.extend({
   components: {
@@ -277,6 +255,7 @@ export default Vue.extend({
     VeeAutocomplete,
     ErrorToaster,
     VeeTextField,
+    DocumentComments
   },
   data () {
     return {
@@ -307,7 +286,6 @@ export default Vue.extend({
         entryUsers: [],
         closureUsers: [],
         property: '',
-        documentComments: [],
         documentProperties: []
       },
       comment: '',
@@ -424,7 +402,6 @@ export default Vue.extend({
           this.document.electronicFolio = document.electronicFolio
           this.document.entryUsers = document.entryUsers
           this.document.closureUsers = document.closureUsers
-          this.document.documentComments = document.documentComments
           this.document.documentProperties = document.documentProperties
         } catch (e) {
           this.fetchError = e
@@ -456,13 +433,6 @@ export default Vue.extend({
     },
     findAttachment: function (attachmentId) {
       return this.documentAttachments.find(attachment => attachment.id === attachmentId)?.name
-    },
-    addComment: function () {
-      if (this.comment === '' || !this.comment) {
-        return
-      }
-      this.document.documentComments.push({comment: this.comment})
-      this.comment = ''
     },
     addDocumentProperty: function () {
       this.document.documentProperties.push({

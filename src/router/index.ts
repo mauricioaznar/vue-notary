@@ -137,7 +137,7 @@ const routes: Array<RouteConfig> = [
         path: 'documentComments/:id',
         name: 'DocumentComments',
         props: true,
-        component: () => import('../views/app/documentComments/DocumentComments.vue')
+        component: () => import('../views/app/documents/DocumentComments.vue')
       },
     ]
   },

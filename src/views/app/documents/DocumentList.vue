@@ -57,24 +57,24 @@
               <v-simple-table>
                 <template slot="default">
                   <thead>
-                    <tr>
-                      <th class="text-left">
-                        Attachment name
-                      </th>
-                      <th class="text-left">
-                        Status
-                      </th>
-                    </tr>
+                  <tr>
+                    <th class="text-left">
+                      Attachment name
+                    </th>
+                    <th class="text-left">
+                      Status
+                    </th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="attachment in item.documentAttachments" :key="attachment.id">
-                      <td>
-                        {{ documentAttachments.find( documentAttachment => documentAttachment.id === attachment.id).name }}
-                      </td>
-                      <td>
-                        <v-simple-checkbox :value="attachment.attachmentStatus === 1" :ripple="false" />
-                      </td>
-                    </tr>
+                  <tr v-for="attachment in item.documentAttachments" :key="attachment.id">
+                    <td>
+                      {{ documentAttachments.find(documentAttachment => documentAttachment.id === attachment.id).name }}
+                    </td>
+                    <td>
+                      <v-simple-checkbox :value="attachment.attachmentStatus === 1" :ripple="false"/>
+                    </td>
+                  </tr>
                   </tbody>
                 </template>
               </v-simple-table>
@@ -92,7 +92,7 @@ import {getCurrentMonth, getCurrentYear} from "@/helpers/date-formats";
 import AdvancedPaginationTable from "@/components/tables/AdvancedPaginationTable.vue";
 import DateTabs from "@/components/tabs/DateTabs.vue";
 import {mapState} from "vuex";
-import DocumentComments from "@/views/app/documentComments/DocumentComments.vue";
+import DocumentComments from "@/views/app/documents/DocumentComments.vue";
 
 
 export default Vue.extend({

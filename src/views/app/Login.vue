@@ -66,8 +66,8 @@ export default Vue.extend({
       snackbar: false,
       activateDialog: false,
       credentials: {
-        username: '',
-        password: ''
+        username: 'admin@example.com',
+        password: 'passwordpassword'
       } as Credentials,
       error: '',
       text: ''
