@@ -23,12 +23,13 @@
       <v-list two-line>
 
         <template v-for="(item, index) in comments">
-          <v-list-item :key="item.id">
+          <v-list-item :key="item.id" :class="userId === item.userId ? 'grey darken-3' : undefined">
             <v-list-item-content>
               <v-list-item-title
-                  class="text--primary"
-                  v-text="item.user ? item.user.fullname : 'no-user'"
-              ></v-list-item-title>
+                  :class="userId === item.userId ? 'yellow--text' : undefined"
+              >
+                {{item.user ? item.user.fullname : 'no-user'}}
+              </v-list-item-title>
               <v-list-item-subtitle v-text="item.comment"></v-list-item-subtitle>
             </v-list-item-content>
 
@@ -105,7 +106,7 @@ import DialogLayout from "@/components/forms/DialogLayout";
 import VeeTextField from "@/components/forms/VeeTextField";
 import ErrorToaster from "@/views/app/ErrorToaster";
 import {NOTARY} from "@/api/NOTARY";
-import {mapGetters, mapState} from "vuex";
+import {mapState} from "vuex";
 import ConfirmDialog from "@/components/dialogs/ConfirmDialog";
 
 export default {

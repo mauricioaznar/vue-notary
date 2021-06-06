@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <loader-simple
-        v-if="loading"
-    />
+  <v-container>
+    <loader-simple v-if="loading"/>
     <horizontal-stepper-layout
         v-if="!loading"
         :steps="steps"
@@ -223,14 +221,16 @@
       </template>
     </horizontal-stepper-layout>
     <ErrorToaster
+        v-if="false"
         v-model="fetchError"
         @relogin="customFetch"
     />
     <ErrorToaster
+        v-if="false"
         v-model="saveError"
         @relogin="() => { save(true) }"
     />
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

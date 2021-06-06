@@ -1,10 +1,7 @@
 <template>
   <v-main>
     <loader-simple v-if="isLoading" />
-    <navbar v-if="!isLoading && authenticated"/>
-    <v-container class="mt-6 mb-16" v-if="!isLoading && authenticated">
-      <router-view></router-view>
-    </v-container>
+    <navbar/>
     <error-toaster
         v-model="error"
         @relogin="customCreated"

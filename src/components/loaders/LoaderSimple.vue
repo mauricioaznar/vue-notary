@@ -1,9 +1,15 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center>
+  <v-container class="fill-height">
+    <v-row justify="center">
       <v-col cols="auto">
-        <v-progress-circular indeterminate />
+        <v-progress-circular size="50" indeterminate> </v-progress-circular>
       </v-col>
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
+
+<script>
+  export default {
+    name: "LoaderSimple"
+  }
+</script>
