@@ -116,6 +116,9 @@ export default Vue.extend({
         this.e1 = val.length
       }
     },
+    e1: function () {
+      this.$emit('change', this.e1)
+    }
   },
   methods: {
     nextStep: async function (position: number) {
@@ -171,7 +174,7 @@ export default Vue.extend({
             (true)
         ]
       }
-    }
+    },
   },
 })
 </script>

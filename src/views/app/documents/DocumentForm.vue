@@ -7,6 +7,7 @@
         v-if="!loading"
         :steps="steps"
         @submit="save"
+        @change="changeCurrentStep"
         :disabled="saving || !this.isEditable"
         :is-sequential="!editMode"
         title="Stepper form"
@@ -214,6 +215,7 @@
       <template slot="step-4">
         <document-comments
             v-if="editMode"
+            :is-visible="currentStep === 4"
             :document-id="id"
         >
 
@@ -298,7 +300,8 @@ export default Vue.extend({
       fetchError: {},
       saveError: {},
       loading: false,
-      saving: false
+      saving: false,
+      currentStep: 1
     }
   },
   props: {
@@ -443,9 +446,15 @@ export default Vue.extend({
     removeDocumentProperty: function (index) {
       this.document.documentProperties
           .splice(index, 1)
+    },
+    changeCurrentStep: function (val) {
+      this.currentStep = val
     }
   },
   watch: {
+    currentStep: function () {
+      console.log(this.currentStep)
+    },
     'document.attachments': {
       handler: function (attachments) {
         const documentAttachments = []
