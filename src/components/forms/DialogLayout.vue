@@ -122,6 +122,9 @@ export default (Vue as VueConstructor<
     dialog: function () {
       this.$emit('input', this.dialog)
       this.$refs.obs.reset()
+      if (!this.dialog) {
+        this.$emit('cancel')
+      }
     }
   }
 })

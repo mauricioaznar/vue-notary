@@ -4,7 +4,8 @@ import {NOTARY} from "@/api/NOTARY";
 class State {
   authenticated = false
   user = null
-  userRoles = []
+  userId = null
+  roleId = null
 }
 
 const mutations = <MutationTree<State>>{
@@ -14,11 +15,13 @@ const mutations = <MutationTree<State>>{
   unsetAuthenticated(state) {
     state.authenticated = false;
     state.user = null
-    state.userRoles = []
+    state.roleId = null
+    state.userId = null
   },
   setProfile(state, user) {
     state.user = user
-    state.userRoles = user.roles
+    state.userId = user.id
+    state.roleId = user.roleId
   }
 };
 
@@ -52,26 +55,21 @@ const actions = <ActionTree<State, any>>{
 };
 
 const getters = <GetterTree<State, any>> {
-  // isSuper: function (state) {
-  //   return function () {
-  //     return state.roleId === 1
-  //   }
-  // },
-  // isAdmin: function (state) {
-  //   return function () {
-  //     return state.roleId === 2 || state.roleId === 1
-  //   }
-  // },
-  // isSalesman: function (state) {
-  //   return function () {
-  //     return state.roleId === 5
-  //   }
-  // },
-  // isProduction: function (state) {
-  //   return function () {
-  //     return state.roleId === 4
-  //   }
-  // },
+  isAdmin: function (state) {
+    return function () {
+      return state.roleId === 1
+    }
+  },
+  isLawyer: function (state) {
+    return function () {
+      return state.roleId === 2
+    }
+  },
+  isSecretary: function (state) {
+    return function () {
+      return state.roleId === 3
+    }
+  },
 }
 
 const Auth = {

@@ -6,9 +6,11 @@
   >
     <v-card>
       <v-card-title class="headline">
-        Use Google's location service?
+        Are you sure you want to delete this item?
       </v-card-title>
-      <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+      <v-card-text>
+        Deleting this item may have irreversible changes.
+      </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
@@ -34,6 +36,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  name: "ConfirmDialog",
   data () {
     return {
       dialog: false
@@ -43,7 +46,7 @@ export default Vue.extend({
     value: {
       type: Boolean,
       required: true
-    }
+    },
   },
   created () {
     this.dialog = this.value
@@ -64,6 +67,7 @@ export default Vue.extend({
         this.$emit('input', true)
       } else {
         this.$emit('input', false)
+        this.$emit('cancel')
       }
     },
     value: function () {
