@@ -39,7 +39,9 @@
       </v-col>
     </template>
     <template v-slot:expanded-item="{ item }">
-      <v-container>
+      <v-container
+        class="mb-12 mt-6"
+      >
         <v-row justify="center">
           <v-col sm="12" md="6">
             <document-comments
