@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-row align="center">
       <v-col cols="auto">
         <h1>
@@ -141,7 +141,7 @@
         v-model="deleteError"
         @relogin="confirmDeletion"
     />
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

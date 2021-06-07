@@ -1,9 +1,9 @@
 <template>
-  <v-main>
+  <v-app>
     <v-container>
       <h1>Not found</h1>
     </v-container>
-  </v-main>
+  </v-app>
 </template>
 
 <script>

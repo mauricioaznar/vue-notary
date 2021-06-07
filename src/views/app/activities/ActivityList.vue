@@ -1,50 +1,45 @@
 <template>
-
-
-    <v-card>
-      <v-container>
-        <v-row>
-          <v-toolbar>
-            <v-toolbar-title>Actividades</v-toolbar-title>
-
-            <v-spacer></v-spacer>
-          </v-toolbar>
-        </v-row>
-        <v-row>
-          <v-col>
-            <simple-table
-                :items="activities"
-                :headers="headers"
-                :item-class="row_classes"
+  <v-container>
+    <v-row>
+      <v-col cols="auto">
+        <h1>
+          Actividades
+        </h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <simple-table
+            :items="activities"
+            :headers="headers"
+            :item-class="row_classes"
+        >
+          <template
+              v-slot:item.type="{ item }"
+          >
+            <v-icon :color="getActivityColor(item)">
+              mdi-{{ getActivityIcon(item) }}
+            </v-icon>
+          </template>
+          <template
+              v-slot:item.entityName="{ item }"
+          >
+            <v-btn
+                elevation="2"
+                v-if="item.type !== 'delete'"
+                icon
+                small
+                :to="`${item.entityName}/${item.entityId}`"
             >
-              <template
-                  v-slot:item.type="{ item }"
-              >
-                <v-icon :color="getActivityColor(item)">
-                  mdi-{{ getActivityIcon(item)}}
-                </v-icon>
-              </template>
-              <template
-                  v-slot:item.entityName="{ item }"
-              >
-                <v-btn
-                    elevation="2"
-                    v-if="item.type !== 'delete'"
-                    icon
-                    small
-                    :to="`${item.entityName}/${item.entityId}`"
-                >
-                  <v-icon>
-                    mdi-link-variant
-                  </v-icon>
-                </v-btn>
-              </template>
-            </simple-table>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
-
+              <v-icon>
+                mdi-link-variant
+              </v-icon>
+            </v-btn>
+          </template>
+        </simple-table>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -57,7 +52,7 @@ import getActivityIcon from "./get-activity-icon";
 export default {
   name: 'NotificationList',
   components: {SimpleTable},
-  data () {
+  data() {
     return {
       previousLastUpdateCheck: null,
       headers: [
@@ -91,15 +86,15 @@ export default {
       ]
     }
   },
-  created () {
+  created() {
     this.previousLastUpdateCheck = this.lastActivityUpdateCheck
-    const mostRecentActivity = this.activities.length > 0 ?  this.activities[0] : null
+    const mostRecentActivity = this.activities.length > 0 ? this.activities[0] : null
     if (mostRecentActivity) {
       this.setLastActivityUpdateCheck(mostRecentActivity.updatedAt)
     }
   },
   beforeDestroy() {
-    const mostRecentActivity = this.activities.length > 0 ?  this.activities[0] : null
+    const mostRecentActivity = this.activities.length > 0 ? this.activities[0] : null
     if (mostRecentActivity) {
       this.setLastActivityUpdateCheck(mostRecentActivity.updatedAt)
     }

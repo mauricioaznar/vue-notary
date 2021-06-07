@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-app>
     <form-layout
       title="Reiniciar contraseña"
       @save:form="save"
@@ -19,7 +19,7 @@
     <error-toaster
       v-model="error"
     />
-  </v-main>
+  </v-app>
 </template>
 
 <script>

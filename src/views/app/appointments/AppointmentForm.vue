@@ -1,76 +1,80 @@
 <template>
-  <loader-simple
-    v-if="loading"
-  />
-  <form-layout
-      v-else
-      title="Appointment"
-      @save:form="save"
-      :disabled="saving || !isEditable"
+  <v-container
+    class="fill-height flex-column d-flex justify-start"
   >
-    <vee-text-field
-        name="Name"
-        rules="required"
-        v-model="appointment.name"
-        :disabled="!isEditable"
+    <loader-simple
+        v-if="loading"
     />
-    <vee-text-field
-        name="Description"
-        v-model="appointment.description"
-        :disabled="!isEditable"
-    />
-    <vee-date
-        v-model="appointment.date"
-        name="Date"
-        rules="required"
-        :disabled="!isEditable"
-    />
-    <vee-time
-        name="Initial date"
-        rules="required"
-        v-model="appointment.startTime"
-        :disabled="!isEditable"
-    />
-    <vee-time
-        name="End date"
-        rules="required|after:@Initial date"
-        v-model="appointment.endTime"
-        :disabled="!isEditable"
-    />
-    <vee-autocomplete
-        name="Room"
-        :items="rooms"
-        v-model="appointment.roomId"
-        item-text="name"
-        item-value="id"
-        rules="required"
-        :disabled="!isEditable"
+    <form-layout
+        v-else
+        title="Appointment"
+        @save:form="save"
+        :disabled="saving || !isEditable"
     >
-    </vee-autocomplete>
-    <vee-autocomplete
-        name="Clients"
-        :items="clients"
-        v-model="appointment.clients"
-        multiple
-        item-text="fullname"
-        item-value="id"
-        return-object
-        rules="required"
-        :disabled="!isEditable"
-    >
-    </vee-autocomplete>
-    <vee-autocomplete
-        name="Users"
-        :items="users"
-        v-model="appointment.users"
-        multiple
-        item-text="name"
-        item-value="id"
-        return-object
-        rules="required"
-        :disabled="!isEditable"
-    >
-    </vee-autocomplete>
+      <vee-text-field
+          name="Name"
+          rules="required"
+          v-model="appointment.name"
+          :disabled="!isEditable"
+      />
+      <vee-text-field
+          name="Description"
+          v-model="appointment.description"
+          :disabled="!isEditable"
+      />
+      <vee-date
+          v-model="appointment.date"
+          name="Date"
+          rules="required"
+          :disabled="!isEditable"
+      />
+      <vee-time
+          name="Initial date"
+          rules="required"
+          v-model="appointment.startTime"
+          :disabled="!isEditable"
+      />
+      <vee-time
+          name="End date"
+          rules="required|after:@Initial date"
+          v-model="appointment.endTime"
+          :disabled="!isEditable"
+      />
+      <vee-autocomplete
+          name="Room"
+          :items="rooms"
+          v-model="appointment.roomId"
+          item-text="name"
+          item-value="id"
+          rules="required"
+          :disabled="!isEditable"
+      >
+      </vee-autocomplete>
+      <vee-autocomplete
+          name="Clients"
+          :items="clients"
+          v-model="appointment.clients"
+          multiple
+          item-text="fullname"
+          item-value="id"
+          return-object
+          rules="required"
+          :disabled="!isEditable"
+      >
+      </vee-autocomplete>
+      <vee-autocomplete
+          name="Users"
+          :items="users"
+          v-model="appointment.users"
+          multiple
+          item-text="name"
+          item-value="id"
+          return-object
+          rules="required"
+          :disabled="!isEditable"
+      >
+      </vee-autocomplete>
+    </form-layout>
     <ErrorToaster
         v-model="fetchError"
         @relogin="customFetch"
@@ -79,7 +83,7 @@
         v-model="saveError"
         @relogin="() => { save(true) }"
     />
-  </form-layout>
+  </v-container>
 </template>
 
 <script lang="ts">

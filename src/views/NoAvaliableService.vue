@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-app>
     <v-container class="fill-height">
 
       <v-row justify="center">
@@ -22,7 +22,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-main>
+  </v-app>
 </template>
 
 <script>

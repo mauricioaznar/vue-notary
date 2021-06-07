@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="fill-height d-flex flex-column justify-start">
     <loader-simple v-if="loading"/>
     <horizontal-stepper-layout
         v-if="!loading"
@@ -42,34 +42,6 @@
             }"
             v-model="document.tome"
             hint="Formatos validos: 12-12 o 12"
-            :disabled="!isEditable"
-        />
-        <vee-autocomplete
-            name="Money laundering"
-            :items="tripleBooleanOptions"
-            v-model="document.moneyLaundering"
-            item-text="text"
-            item-value="value"
-            @input="(val) => {
-              if (val === -1) {
-                document.moneyLaunderingExpirationDate = null
-              } else {
-                if (document.moneyLaunderingExpirationDate === null && initialDocument.moneyLaunderingExpirationDate) {
-                  document.moneyLaunderingExpirationDate = initialDocument.moneyLaunderingExpirationDate
-                }
-              }
-            }"
-            :disabled="!isEditable"
-        >
-        </vee-autocomplete>
-        <vee-date
-            v-show="document.moneyLaundering !== -1"
-            name="Money laundering date"
-            :rules="{
-               required: document.moneyLaundering !== -1
-            }"
-            clearable
-            v-model="document.moneyLaunderingExpirationDate"
             :disabled="!isEditable"
         />
         <vee-autocomplete
@@ -159,6 +131,34 @@
             :disabled="!isEditable"
         >
         </vee-autocomplete>
+        <vee-autocomplete
+            name="Money laundering"
+            :items="tripleBooleanOptions"
+            v-model="document.moneyLaundering"
+            item-text="text"
+            item-value="value"
+            @input="(val) => {
+              if (val === -1) {
+                document.moneyLaunderingExpirationDate = null
+              } else {
+                if (document.moneyLaunderingExpirationDate === null && initialDocument.moneyLaunderingExpirationDate) {
+                  document.moneyLaunderingExpirationDate = initialDocument.moneyLaunderingExpirationDate
+                }
+              }
+            }"
+            :disabled="!isEditable"
+        >
+        </vee-autocomplete>
+        <vee-date
+            v-show="document.moneyLaundering !== -1"
+            name="Money laundering date"
+            :rules="{
+               required: document.moneyLaundering !== -1
+            }"
+            clearable
+            v-model="document.moneyLaunderingExpirationDate"
+            :disabled="!isEditable"
+        />
         <v-simple-table>
           <template v-slot:default>
             <thead>
@@ -221,12 +221,10 @@
       </template>
     </horizontal-stepper-layout>
     <ErrorToaster
-        v-if="false"
         v-model="fetchError"
         @relogin="customFetch"
     />
     <ErrorToaster
-        v-if="false"
         v-model="saveError"
         @relogin="() => { save(true) }"
     />

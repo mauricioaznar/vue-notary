@@ -1,13 +1,18 @@
 <template>
-  <v-main>
+  <v-app>
+    <navbar v-if="!isLoading" />
+    <v-main v-if="!isLoading">
+      <v-container class="px-0 px-md-6 fill-height d-flex flex-column justify-start">
+        <router-view />
+      </v-container>
+    </v-main>
     <loader-simple v-if="isLoading" />
-    <navbar/>
     <error-toaster
         v-model="error"
         @relogin="customCreated"
     />
     <activity-toaster />
-  </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
@@ -22,10 +27,10 @@ import ActivityToaster from "@/views/app/activities/ActivityToaster.vue";
 export default Vue.extend({
   name: "App",
   components: {
+    Navbar,
     ActivityToaster,
     ErrorToaster,
     LoaderSimple,
-    Navbar
   },
   data () {
     return {
