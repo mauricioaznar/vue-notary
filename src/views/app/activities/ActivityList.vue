@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="auto">
         <h1>
-          Actividades
+          Activity feed
         </h1>
       </v-col>
     </v-row>

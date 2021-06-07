@@ -13,6 +13,8 @@
             v-model="selectedDate"
             no-label
             name="Selected date"
+            hide-details
+            solo
         >
         </vee-date>
       </v-col>

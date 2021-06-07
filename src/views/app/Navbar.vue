@@ -79,7 +79,7 @@
           <v-divider></v-divider>
 
           <v-list-item
-              to="/"
+              to="/roadmap"
               exact
           >
             <v-list-item-title>Home</v-list-item-title>
