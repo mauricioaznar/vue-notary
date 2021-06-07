@@ -84,6 +84,7 @@
           name="comment"
           rules="required"
           v-model="comment"
+          no-label
       />
 
     </dialog-layout>

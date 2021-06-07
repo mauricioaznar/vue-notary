@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <navbar v-if="!isLoading" />
-    <v-main v-if="!isLoading">
+    <navbar v-if="!isLoading && authenticated" />
+    <v-main v-if="!isLoading && authenticated">
       <v-container class="px-0 px-md-6 fill-height d-flex flex-column justify-start">
         <router-view />
       </v-container>

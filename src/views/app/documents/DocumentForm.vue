@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height d-flex flex-column justify-start">
+  <v-container class="fill-height d-flex flex-column justify-start px-0 px-md-6">
     <loader-simple v-if="loading"/>
     <horizontal-stepper-layout
         v-if="!loading"

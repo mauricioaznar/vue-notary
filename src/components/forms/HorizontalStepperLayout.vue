@@ -35,6 +35,7 @@
             <v-stepper-content
                 :key="`${index + 1}-content`"
                 :step="index + 1"
+                class="px-0 px-md-6"
             >
               <v-container>
                 <v-row justify="center">
