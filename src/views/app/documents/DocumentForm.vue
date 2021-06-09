@@ -286,7 +286,8 @@ export default Vue.extend({
         entryUsers: [],
         closureUsers: [],
         property: '',
-        documentProperties: []
+        documentProperties: [],
+        documentComments: []
       },
       comment: '',
       initialDocument: null as Documents | null,
