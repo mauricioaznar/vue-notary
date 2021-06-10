@@ -1,5 +1,5 @@
 {
-  "name": "notary-manager",
+  "name": "notary",
   "version": "2.0.0-beta.2",
   "private": true,
   "scripts": {

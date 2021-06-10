@@ -14,12 +14,9 @@
           plain
           :ripple="false"
           to="/"
+          class="custom-title"
       >
-        <v-img
-            max-width="150"
-            src="@/assets/img/masoc_logo_small.png"
-        >
-        </v-img>
+        Notary
       </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-title
@@ -60,24 +57,6 @@
         <v-list-item-group
             active-class="text--accent-4"
         >
-          <v-list-item
-              :inactive="true"
-              :ripple="false"
-              class="my-6"
-          >
-            <v-list-item-content>
-              <v-img
-                  disabled
-                  max-width="130"
-                  class="mx-12"
-                  src="@/assets/img/masoc_logo_small.png"
-              >
-              </v-img>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
           <v-list-item
               to="/roadmap"
               exact
@@ -155,7 +134,7 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters('activities', [
-      'getUncheckedActivities',
+      'getUncheckedActivities'
     ]),
   },
   methods: {
@@ -169,3 +148,13 @@ export default Vue.extend({
   }
 })
 </script>
+
+
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css?family=Questrial");
+
+nav .custom-title {
+  font-family: "Questrial";
+  letter-spacing: .4rem;
+}
+</style>
