@@ -111,6 +111,11 @@ export default Vue.extend({
       }
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.$forceUpdate();
+    });
+  },
   watch: {
     steps(val) {
       if (this.e1 > val.length) {
