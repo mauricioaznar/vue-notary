@@ -4,7 +4,7 @@
   />
   <form-layout
       v-else
-      title="Usuario"
+      title="User"
       @save:form="save"
       :disabled="saving"
   >
@@ -57,7 +57,7 @@
     />
 
     <v-row
-        class="mt-4 mb-2"
+        class="mt-4 mb-12"
         v-if="isEditMode"
     >
       <v-spacer/>
@@ -65,32 +65,11 @@
         <v-btn
             @click="generateResetTokenLink"
         >
-          Generar link para reiniciar contrasena
+          Generate link to reset passwword
         </v-btn>
       </v-col>
     </v-row>
-    <v-row
-        class="mt-2 mb-6"
-        v-if="isEditMode && resetTokenLink !== ''"
-    >
-      <v-spacer />
-      <v-col cols="3">
-        <a
-            :href="`https://mail.google.com/mail/?view=cm&fs=1&to=${user.email}&body=${resetTokenLink}&subject=contrasena`"
-            target="_blank"
-        >
-          Enviar link de reinicio (GMAIL)
-        </a>
-      </v-col>
-      <v-col cols="3">
-        <a
-            :href="`http://www.hotmail.msn.com/secure/start?action=compose&to=${user.email}&body=${resetTokenLink}&subject=contrasena`"
-            target="_blank"
-        >
-          Enviar link de reinicio (HOTMAIL)
-        </a>
-      </v-col>
-    </v-row>
+
     <ErrorToaster
         v-model="fetchError"
         @relogin="customFetch"
@@ -102,6 +81,9 @@
     <ErrorToaster
         v-model="generateTokenError"
         @relogin="generateResetTokenLink"
+    />
+    <SuccessToaster
+      v-model="successMessage"
     />
   </form-layout>
 </template>
@@ -116,9 +98,11 @@ import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {User} from '@/models/User'
+import SuccessToaster from '@/components/toaster/SuccessToaster.vue';
 
 export default Vue.extend({
   components: {
+    SuccessToaster,
     LoaderSimple,
     VeeTextField,
     FormLayout,
@@ -138,6 +122,7 @@ export default Vue.extend({
       saveError: {},
       fetchError: {},
       generateTokenError: {},
+      successMessage: '',
       resetTokenLink: '',
       user: {
         name: '',
@@ -173,7 +158,7 @@ export default Vue.extend({
           this.user.roleId = user.roleId
           this.user.groups = user.groups
         } catch (e) {
-          this.submitError = e
+          this.fetchError = e
         }
       }
       this.loading = false
@@ -182,9 +167,18 @@ export default Vue.extend({
       try {
         const response = await NOTARY
             .post(`auth/generate_reset_token`, {userId: parseInt(this.id)})
-        console.log(window.location)
-        this.resetTokenLink
+
+        const resetTokenLink
             = `${window.location.origin}/auth/${response.data.reset_token}`
+
+
+        const input = document.createElement('input');
+        input.setAttribute('value', resetTokenLink);
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        this.successMessage = 'The link has been copied to clipboard!. '
       } catch (e) {
         this.generateTokenError = e
       }

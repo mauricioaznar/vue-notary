@@ -3,6 +3,7 @@
       entity-url="documents"
       :title="'Documents'"
       :headers="headers"
+      extended
       banner="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
       edit-route-name="DocumentsEdit"
       create-route-name="DocumentsNew"
@@ -103,9 +104,14 @@ export default Vue.extend({
     return {
       search: '',
       dates: {
-        month: getCurrentMonth(),
         year: getCurrentYear()
       },
+    }
+  },
+  created() {
+    const year = window.localStorage.getItem('documents_year')
+    if (year) {
+      this.dates.year = Number(year)
     }
   },
   computed: {
@@ -153,6 +159,15 @@ export default Vue.extend({
       ]
     }
   },
+  watch: {
+    'dates': {
+      handler: function () {
+        console.log(this.dates)
+        window.localStorage.setItem('documents_year', this.dates.year)
+      },
+      deep: true
+    }
+  }
 })
 </script>
 

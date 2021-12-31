@@ -19,6 +19,9 @@
     <error-toaster
       v-model="error"
     />
+    <success-toaster
+      v-model="successMessage"
+    />
   </v-app>
 </template>
 
@@ -27,8 +30,9 @@ import VeeTextField from "@/components/forms/VeeTextField";
 import FormLayout from "@/components/forms/FormLayout";
 import {NOTARY} from "@/api/NOTARY";
 import ErrorToaster from "@/views/app/ErrorToaster";
+import SuccessToaster from '@/components/toaster/SuccessToaster';
 export default {
-  components: {ErrorToaster, FormLayout, VeeTextField},
+  components: { SuccessToaster, ErrorToaster, FormLayout, VeeTextField},
   props: {
     token: {
       type: String,
@@ -39,17 +43,26 @@ export default {
     return {
       password1: '',
       password2: '',
-      error: {}
+      error: {},
+      successMessage: ''
     }
   },
   methods: {
     save: async function (isValid) {
       if (isValid) {
         try {
+
           const response = await NOTARY.post(`auth/change_password/${this.token}`, {
             password: this.password1
           })
-          console.log(response)
+
+          if (response.status === 201) {
+            this.successMessage = 'The password has been successfully changed.'
+            setTimeout(() => {
+              this.$router.push('/')
+            }, 2000)
+          }
+
         } catch (e) {
          this.error = e
         }
@@ -62,3 +75,4 @@ export default {
 <style scoped>
 
 </style>
+

@@ -16,11 +16,13 @@
           >
             <v-icon>mdi-plus</v-icon>
           </v-btn>
-          <template v-slot:extension>
+
+          <template v-if="extended" v-slot:extension>
             <slot name="extension">
 
             </slot>
           </template>
+
         </v-toolbar>
       </v-col>
     </v-row>
@@ -180,7 +182,13 @@ export default {
       default: function () {
         return false
       }
-    }
+    },
+    extended: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
+    },
   },
   data () {
     return {
