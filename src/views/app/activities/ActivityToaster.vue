@@ -6,8 +6,8 @@
       :color="getColor(activity)"
       @input="snackbar = false"
       timeout="5000"
-      left
-      top
+      bottom
+      right
     >
       <div v-html="activity.description"></div>
 

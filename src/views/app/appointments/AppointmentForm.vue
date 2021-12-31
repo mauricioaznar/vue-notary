@@ -29,14 +29,14 @@
           :disabled="!isEditable"
       />
       <vee-time
-          name="Initial date"
+          name="Start time"
           rules="required"
           v-model="appointment.startTime"
           :disabled="!isEditable"
       />
       <vee-time
-          name="End date"
-          rules="required|after:@Initial date"
+          name="End time"
+          rules="required|after:@Start time"
           v-model="appointment.endTime"
           :disabled="!isEditable"
       />

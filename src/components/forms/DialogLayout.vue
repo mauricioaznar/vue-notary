@@ -7,50 +7,31 @@
           max-width="600px"
       >
         <v-card>
-          <v-toolbar
-            dark
-            color="primary"
-            class="mb-6"
-          >
-            <v-btn
-              v-if="showClose"
-              icon
-              @click="dialog = false"
-            >
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-btn>
-            <v-toolbar-title>{{title}}</v-toolbar-title>
-            <v-spacer />
-          </v-toolbar>
+          <v-card-title>
+            <span class="headline">{{title}}</span>
+          </v-card-title>
           <v-card-text>
             <v-container>
-              <slot></slot>
+              <slot />
             </v-container>
           </v-card-text>
           <v-card-actions>
-            <v-row justify="end" class="my-6">
-              <v-col cols="3">
-                <v-btn
-                    v-if="showClose"
-                    color="blue darken-1"
-                    text
-                    @click="dialog = false"
-                >
-                  Cancel
-                </v-btn>
-              </v-col>
-              <v-col cols="3">
-                <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="save"
-                >
-                  Submit
-                </v-btn>
-              </v-col>
-            </v-row>
+            <v-spacer></v-spacer>
+            <v-btn
+                v-if="showClose"
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+                color="blue darken-1"
+                text
+                @click="save"
+            >
+              Save
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -70,7 +51,6 @@ export default (Vue as VueConstructor<
   };
 }
   >).extend({
-  name: 'DialogLayout',
   data() {
     return {
       dialog: false
@@ -122,9 +102,6 @@ export default (Vue as VueConstructor<
     dialog: function () {
       this.$emit('input', this.dialog)
       this.$refs.obs.reset()
-      if (!this.dialog) {
-        this.$emit('cancel')
-      }
     }
   }
 })

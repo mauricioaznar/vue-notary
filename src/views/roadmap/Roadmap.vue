@@ -8,40 +8,19 @@
         hide-dot
         class="mb-12 align-center"
       >
-        <h1 class="text-center">Plan de desarrollo</h1>
+        <h1 class="text-center">Roadmap</h1>
       </v-timeline-item>
       <roadmap-title
-        title="NOTARY-MANAGER v.2.0.0 (primer lanzamiento)"
+        title="NOTARY v.2.0.0"
       />
       <roadmap-item
-          date="2021-05-18"
+          date="2022-05-18"
       >
-        [Caracteristica] Aplicación apobada por los usuarios.
-        <ul>
-          <li>
-            Aplicacion contiene toda las caracteristicas y funciona como la aplicacion anterior
-          </li>
-        </ul>
-      </roadmap-item>
-      <roadmap-item
-          date="2021-05-19"
-      >
-        [Caracteristica] Cambiar fecha por año en la base de datos.
-      </roadmap-item>
-      <roadmap-item
-          date="2021-05-18"
-      >
-        [Caracteristica] Entidades no se pueden borrar si tienen un registro dependiente
-        <ul>
-          <li>Clientes</li>
-          <li>Otorgantes</li>
-          <li>Usuarios</li>
-          <li>Grupos</li>
-        </ul>
+        [Characteristic] Application has been approved by users.
       </roadmap-item>
 
       <roadmap-title
-          title="NOTARY-MANAGER v.2.0.0-beta-2 (actual)"
+          title="NOTARY v.2.0.0-beta-2 (current)"
       />
       <roadmap-item
           color="green"
@@ -53,31 +32,24 @@
           color="green"
           date="2021-05-03"
       >
-        [Caracteristica] La aplicacion detecta cuando no hay conexion con el servidor y muestra un mensaje. El usuario
-        puede reinentar la conexion.
+        [Caracteristica] Application detects when there is not a connection to the server and shows a message.
       </roadmap-item>
 
 
       <roadmap-title
-          title="NOTARY-MANAGER v.2.0.0-beta-1"
+          title="NOTARY v.2.0.0-beta-1"
       />
       <roadmap-item
           color="green"
           date="2021-04-30"
       >
-        [Caracteristica] Desarrollo completo de la aplicacion
+        [Caracteristica] Show a dialog when an appointment gets clicked.
       </roadmap-item>
       <roadmap-item
           color="green"
           date="2021-04-30"
       >
-        [Caracteristica] Mejorar el dialogo que aparece cuando le das click a una cita.
-      </roadmap-item>
-      <roadmap-item
-          color="green"
-          date="2021-04-30"
-      >
-        [Caracteristica] Mejorar la experiencia de inicio de sesion
+        [Caracteristica] Improve overall user experience when users logs in
       </roadmap-item>
     </v-timeline>
   </v-container>

@@ -20,7 +20,7 @@ const socket = io(baseUrl);
 Vue.use(VueSocketIOExt, socket, { store });
 
 
-moment.locale('es')
+moment.locale('en')
 
 new Vue({
   router,

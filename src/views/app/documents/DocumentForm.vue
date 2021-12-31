@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height d-flex flex-column justify-start px-0 px-md-6">
     <loader-simple v-if="loading"/>
-    <horizontal-stepper-layout
+    <stepper-layout
         v-if="!loading"
         :steps="steps"
         @submit="save"
@@ -219,7 +219,7 @@
 
         </document-comments>
       </template>
-    </horizontal-stepper-layout>
+    </stepper-layout>
     <ErrorToaster
         v-model="fetchError"
         @relogin="customFetch"
@@ -235,20 +235,20 @@
 
 import Vue from 'vue';
 import VeeTextField from '@/components/forms/VeeTextField.vue';
-import {NOTARY} from '@/api/NOTARY'
-import {Documents} from '@/models/Documents'
-import ErrorToaster from '@/views/app/ErrorToaster.vue'
-import VeeDate from '@/components/forms/VeeDate.vue'
-import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue'
-import {mapState} from 'vuex'
-import VeeCheckbox from '@/components/forms/VeeCheckbox.vue'
-import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
-import HorizontalStepperLayout from "@/components/forms/HorizontalStepperLayout.vue";
-import DocumentComments from "@/views/app/documents/DocumentComments.vue";
+import { NOTARY } from '@/api/NOTARY';
+import { Documents } from '@/models/Documents';
+import ErrorToaster from '@/views/app/ErrorToaster.vue';
+import VeeDate from '@/components/forms/VeeDate.vue';
+import VeeAutocomplete from '@/components/forms/VeeAutocomplete.vue';
+import { mapState } from 'vuex';
+import VeeCheckbox from '@/components/forms/VeeCheckbox.vue';
+import LoaderSimple from '@/components/loaders/LoaderSimple.vue';
+import DocumentComments from '@/views/app/documents/DocumentComments.vue';
+import StepperLayout from '@/components/forms/StepperLayout.vue';
 
 export default Vue.extend({
   components: {
-    HorizontalStepperLayout,
+    StepperLayout,
     LoaderSimple,
     VeeCheckbox,
     VeeDate,

@@ -39,7 +39,7 @@
             >
               <v-container>
                 <v-row justify="center">
-                  <v-col sm=12 md="9">
+                  <v-col sm=12>
                     <v-card
                         class="px-3 pt-3 pb-12"
                         outlined
@@ -49,7 +49,7 @@
                     <v-row justify="end" class="my-6">
                       <v-col cols="auto">
                         <v-btn text @click="previousStep(index + 1)">
-                          Previous step
+                          Previous
                         </v-btn>
                       </v-col>
                       <v-col cols="auto">
@@ -58,7 +58,7 @@
                             @click="nextStep(index + 1)"
                             :disabled="!props.valid"
                         >
-                          {{ steps.length === index + 1 ? 'Finish' : 'Next step' }}
+                          {{ steps.length === index + 1 ? 'Save' : 'Next' }}
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -69,6 +69,17 @@
           </validation-observer>
         </v-stepper-items>
       </v-stepper>
+      <v-snackbar
+          v-model="errorSnackbar"
+          color="red"
+          right
+          bottom
+      >
+        The following fields have an error:
+        <ul>
+          <li v-for="field in errorFields" :key="field">{{ field }}</li>
+        </ul>
+      </v-snackbar>
     </validation-observer>
   </custom-container>
 </template>
@@ -79,10 +90,12 @@ import {ValidationObserver} from "vee-validate";
 import CustomContainer from "@/components/layouts/CustomContainer.vue";
 
 export default Vue.extend({
-  name: "HorizontalStepperLayout",
+  name: "StepperLayout",
   data() {
     return {
       e1: 1,
+      errorSnackbar: false,
+      errorFields: []
     }
   },
   components: {
@@ -132,7 +145,11 @@ export default Vue.extend({
           if (isFormValid) {
             this.$emit('submit', true);
           } else {
-            console.log('is not valid')
+            const errors = Object.keys(this.$refs.obs.errors)
+            this.errorFields = errors.filter(field => {
+              return this.$refs.obs.errors[field].length >= 1
+            })
+            this.errorSnackbar = true
           }
         } else {
           this.e1 = position + 1;
