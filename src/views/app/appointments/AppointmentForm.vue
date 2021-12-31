@@ -98,7 +98,7 @@ import {NOTARY} from '@/api/NOTARY'
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
 import {Appointment} from '@/models/Appointment'
-import {datePickerDateFormat, timePickerTimeFormat} from '@/helpers/dateFormats'
+import {datePickerDateFormat, timePickerTimeFormat} from '@/helpers/date-formats'
 import moment from 'moment'
 
 export default Vue.extend({

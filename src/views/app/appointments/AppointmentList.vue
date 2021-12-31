@@ -152,10 +152,9 @@ import {NOTARY} from '@/api/NOTARY'
 import {Appointment} from '@/models/Appointment'
 import VeeDate from '@/components/forms/VeeDate.vue'
 import moment from 'moment'
-import {dateFormat, dateTimeFormat} from '@/helpers/dateFormats'
+import {dateFormat, dateTimeFormat, formatTime} from '@/helpers/date-formats'
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue'
 import ErrorToaster from '@/views/app/ErrorToaster.vue'
-import {formatTime} from '@/helpers/date-formats'
 import {mapState} from "vuex";
 import {State as StaticState} from "@/store/statics";
 

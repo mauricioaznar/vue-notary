@@ -54,7 +54,7 @@ import {
   dateTimeFormat,
   timeFormat,
   timePickerTimeFormat
-} from "@/helpers/dateFormats";
+} from "@/helpers/date-formats";
 import moment from "moment";
 
 export default {

@@ -49,7 +49,7 @@
 
 <script>
 import {ValidationProvider} from "vee-validate";
-import {dateFormat, datePickerDateFormat,} from "@/helpers/dateFormats";
+import {dateFormat, datePickerDateFormat,} from "@/helpers/date-formats";
 import moment from "moment";
 
 export default {
