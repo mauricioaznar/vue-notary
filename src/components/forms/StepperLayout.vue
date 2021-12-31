@@ -56,7 +56,7 @@
                         <v-btn
                             color="primary"
                             @click="nextStep(index + 1)"
-                            :disabled="!props.valid"
+                            :disabled="!props.valid || (steps.length === index + 1 && disabled)"
                         >
                           {{ steps.length === index + 1 ? 'Save' : 'Next' }}
                         </v-btn>
