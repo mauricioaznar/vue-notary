@@ -28,4 +28,5 @@ export class Documents {
   entryUsers: [];
   documentComments: [];
   documentProperties: [];
+  documentFiles: [];
 }

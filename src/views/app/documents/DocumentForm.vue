@@ -219,7 +219,45 @@
         >
         </vee-autocomplete>
       </template>
-      <template slot='step-4'>
+      <template slot="step-4">
+        <vee-file
+          name="Certificados"
+          v-model="files"
+          multiple
+          hint="Only use this field to add new files"
+        />
+        <v-simple-table v-if="document.documentFiles.length > 0" class="mb-6">
+          <template v-slot:default>
+            <thead>
+            <tr>
+              <th class="text-left">
+                Files
+              </th>
+              <th />
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              v-for="(documentFile, index) in document.documentFiles"
+              :key="index"
+            >
+              <td>
+                {{documentFile.originalName}}
+              </td>
+              <td class="d-flex align-center justify-end">
+                <v-btn link icon :href="documentFile.url" target="_blank">
+                  <v-icon>mdi-download</v-icon>
+                </v-btn>
+                <v-btn class="ml-2" @click="removeDocumentFile(documentFile)" icon>
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </td>
+            </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </template>
+      <template slot='step-5'>
         <document-comments
           v-if='editMode'
           :is-visible='currentStep === 4'
@@ -255,9 +293,11 @@ import VeeCheckbox from '@/components/forms/VeeCheckbox.vue';
 import LoaderSimple from '@/components/loaders/LoaderSimple.vue';
 import DocumentComments from '@/views/app/documents/DocumentComments.vue';
 import StepperLayout from '@/components/forms/StepperLayout.vue';
+import VeeFile from '@/components/forms/VeeFile.vue';
 
 export default Vue.extend({
   components: {
+    VeeFile,
     StepperLayout,
     LoaderSimple,
     VeeCheckbox,
@@ -299,7 +339,9 @@ export default Vue.extend({
         property: '',
         documentProperties: [],
         documentComments: [],
+        documentFiles: [],
       },
+      files: [],
       comment: '',
       years: years,
       initialDocument: null as Documents | null,
@@ -349,6 +391,10 @@ export default Vue.extend({
         },
         {
           title: 'Step 3',
+          optional: false,
+        },
+        {
+          title: 'Files',
           optional: false,
         },
       ];
@@ -417,6 +463,7 @@ export default Vue.extend({
           this.document.entryUsers = document.entryUsers;
           this.document.closureUsers = document.closureUsers;
           this.document.documentProperties = document.documentProperties;
+          this.document.documentFiles = document.documentFiles;
         } catch (e) {
           this.fetchError = e;
         }
@@ -431,11 +478,28 @@ export default Vue.extend({
         };
         try {
           this.disabled = true;
+          let id
           if (this.id) {
+            id = this.id
             await NOTARY.patch(`documents/${this.id}`, documentData);
           } else {
-            await NOTARY.post(`documents`, documentData);
+            const post = await NOTARY.post(`documents`, documentData);
+            id = post.data.id
           }
+
+          if (this.files.length > 0) {
+            const formData = new FormData()
+            this.files.forEach((file) => {
+              formData.append('files', file)
+            })
+            await NOTARY
+              .post(`documents/files/${id}`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              })
+          }
+
           this.$router.push({
             name: 'Documents',
           });
@@ -460,6 +524,9 @@ export default Vue.extend({
     },
     changeCurrentStep: function(val) {
       this.currentStep = val;
+    },
+    removeDocumentFile: function (val) {
+      this.document.documentFiles = this.document.documentFiles.filter(dc => dc.id !== val.id)
     },
   },
   watch: {
