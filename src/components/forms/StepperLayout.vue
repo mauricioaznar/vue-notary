@@ -43,6 +43,7 @@
                     <v-card
                         class="px-3 pt-3 pb-12"
                         outlined
+                        min-height="400"
                     >
                       <slot :name="`step-${index + 1}`"/>
                     </v-card>

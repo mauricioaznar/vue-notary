@@ -47,12 +47,6 @@
           hint='Formatos validos: 12-12 o 12'
           :disabled='!isEditable'
         />
-        <vee-text-field
-          rules='required'
-          name='File number'
-          v-model='document.fileNumber'
-          :disabled='!isEditable'
-        />
         <vee-autocomplete
           name='Document type'
           :items='documentTypes'
@@ -115,18 +109,6 @@
           :disabled='!isEditable'
         >
         </vee-autocomplete>
-        <vee-date
-          name='Public registry entry date'
-          rules='required'
-          v-model='document.publicRegistryEntryDate'
-          :disabled='!isEditable'
-        />
-        <vee-date
-          name='Public registry exit date'
-          rules='required'
-          v-model='document.publicRegistryExitDate'
-          :disabled='!isEditable'
-        />
       </template>
       <template slot='step-3'>
         <vee-autocomplete
@@ -140,34 +122,6 @@
           :disabled='!isEditable'
         >
         </vee-autocomplete>
-        <vee-autocomplete
-          name='Money laundering'
-          :items='tripleBooleanOptions'
-          v-model='document.moneyLaundering'
-          item-text='text'
-          item-value='value'
-          @input='(val) => {
-              if (val === -1) {
-                document.moneyLaunderingExpirationDate = null
-              } else {
-                if (document.moneyLaunderingExpirationDate === null && initialDocument.moneyLaunderingExpirationDate) {
-                  document.moneyLaunderingExpirationDate = initialDocument.moneyLaunderingExpirationDate
-                }
-              }
-            }'
-          :disabled='!isEditable'
-        >
-        </vee-autocomplete>
-        <vee-date
-          v-show='document.moneyLaundering !== -1'
-          name='Money laundering date'
-          :rules='{
-               required: document.moneyLaundering !== -1
-            }'
-          clearable
-          v-model='document.moneyLaunderingExpirationDate'
-          :disabled='!isEditable'
-        />
         <v-simple-table>
           <template v-slot:default>
             <thead>
@@ -196,28 +150,6 @@
             </tbody>
           </template>
         </v-simple-table>
-        <vee-autocomplete
-          name='Entry users'
-          :items='users'
-          v-model='document.entryUsers'
-          multiple
-          item-text='fullname'
-          item-value='id'
-          return-object
-          :disabled='!isEditable'
-        >
-        </vee-autocomplete>
-        <vee-autocomplete
-          name='Closure users'
-          :items='users'
-          v-model='document.closureUsers'
-          multiple
-          item-text='fullname'
-          item-value='id'
-          return-object
-          :disabled='!isEditable'
-        >
-        </vee-autocomplete>
       </template>
       <template slot="step-4">
         <vee-file
@@ -301,7 +233,6 @@ export default Vue.extend({
     StepperLayout,
     LoaderSimple,
     VeeCheckbox,
-    VeeDate,
     VeeAutocomplete,
     ErrorToaster,
     VeeTextField,
@@ -311,12 +242,9 @@ export default Vue.extend({
     return {
       document: {
         folio: '',
-        date: '',
-        documentTypeOther: '',
         fileNumber: '',
         tome: '',
-        moneyLaundering: -1,
-        moneyLaunderingExpirationDate: '',
+
         documentStatusId: '',
         clientId: '',
         documentTypeId: '',
@@ -325,18 +253,7 @@ export default Vue.extend({
         groups: [],
         year: '',
         attachments: [],
-        electronicFolio: '',
         documentAttachments: [],
-        marginalNotes: '',
-        personalities: -1,
-        documentRegistry: -1,
-        publicRegistryPatent: -1,
-        identifications: -1,
-        publicRegistryExitDate: '',
-        publicRegistryEntryDate: '',
-        entryUsers: [],
-        closureUsers: [],
-        property: '',
         documentProperties: [],
         documentComments: [],
         documentFiles: [],
@@ -437,31 +354,16 @@ export default Vue.extend({
           const document = result.data as Documents;
           this.initialDocument = result.data as Documents;
           this.document.folio = document.folio;
-          this.document.fileNumber = document.fileNumber;
           this.document.tome = document.tome;
           this.document.year = document.year;
-          this.document.moneyLaundering = document.moneyLaundering;
-          this.document.moneyLaunderingExpirationDate = document.moneyLaunderingExpirationDate;
           this.document.documentStatusId = document.documentStatusId;
           this.document.documentTypeId = document.documentTypeId;
-          this.document.documentTypeOther = document.documentTypeOther;
           this.document.clientId = document.clientId;
           this.document.operations = document.operations;
           this.document.groups = document.groups;
           this.document.grantors = document.grantors;
-          this.document.property = document.property;
-          this.document.marginalNotes = document.marginalNotes;
-          this.document.personalities = document.personalities;
-          this.document.identifications = document.identifications;
-          this.document.publicRegistryPatent = document.publicRegistryPatent;
-          this.document.documentRegistry = document.documentRegistry;
-          this.document.publicRegistryEntryDate = document.publicRegistryEntryDate;
-          this.document.publicRegistryExitDate = document.publicRegistryExitDate;
           this.document.attachments = document.attachments;
           this.document.documentAttachments = document.documentAttachments;
-          this.document.electronicFolio = document.electronicFolio;
-          this.document.entryUsers = document.entryUsers;
-          this.document.closureUsers = document.closureUsers;
           this.document.documentProperties = document.documentProperties;
           this.document.documentFiles = document.documentFiles;
         } catch (e) {
@@ -511,16 +413,6 @@ export default Vue.extend({
     },
     findAttachment: function(attachmentId) {
       return this.documentAttachments.find(attachment => attachment.id === attachmentId)?.name;
-    },
-    addDocumentProperty: function() {
-      this.document.documentProperties.push({
-        property: '',
-        electronicFolio: '',
-      });
-    },
-    removeDocumentProperty: function(index) {
-      this.document.documentProperties
-        .splice(index, 1);
     },
     changeCurrentStep: function(val) {
       this.currentStep = val;

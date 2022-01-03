@@ -25,20 +25,6 @@
           hide-details
       />
     </template>
-    <template v-slot:actions={item}>
-      <v-col>
-        <v-btn
-            elevation="6s"
-            icon
-            small
-            @click="console.log(item)"
-        >
-          <v-icon>
-            mdi-comment
-          </v-icon>
-        </v-btn>
-      </v-col>
-    </template>
     <template v-slot:expanded-item="{ item }">
       <v-container
         class="mb-12 mt-6"
