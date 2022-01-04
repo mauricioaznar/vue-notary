@@ -132,7 +132,6 @@ export default Vue.extend({
           value: 'expectedCompletionDate',
           width: '10%',
           formatter: function(value) {
-            console.log(value);
             return value ? getAfterOrBefore(value) : '-';
           },
         },
@@ -155,6 +154,7 @@ export default Vue.extend({
   },
   methods: {
     rowClass: function(item) {
+      console.log(item)
       if (item.expectedCompletionDate && item.documentStatusId !== 4) {
         const days = getDaysSubNow(item.expectedCompletionDate);
         if (days <= 7) {
