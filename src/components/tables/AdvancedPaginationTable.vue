@@ -40,6 +40,7 @@
             :expanded="expanded"
             :single-expand="true"
             :show-expand="showExpand"
+            :item-class="rowClass"
             :footer-props="{
               'items-per-page-options': [10, 20, 30, 40, 50],
               'items-per-page-text': ''
@@ -87,6 +88,7 @@
             <v-row dense class="flex-nowrap">
               <v-col>
                 <v-btn
+
                     small
                     icon
                     elevation="6"
@@ -162,6 +164,10 @@ export default {
       default: () => {
         return
       }
+    },
+    rowClass: {
+      type: Function,
+      required: false
     },
     editRouteName: {
       type: String,

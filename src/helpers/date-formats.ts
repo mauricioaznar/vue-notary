@@ -32,6 +32,18 @@ export const getCurrentYear = () => {
   return moment().format("YYYY");
 };
 
+export const getAfterOrBefore = (date: string) => {
+  const dateMoment = moment(date, dateFormat);
+  return moment().isBefore(dateMoment)
+    ? moment().to(dateMoment)
+    : dateMoment.from(moment());
+};
+
+export const getDaysSubNow = (date: string) => {
+  const dateMoment = moment(date, dateFormat);
+  return dateMoment.diff(moment(), "days");
+};
+
 const startYear = 2000;
 export const years = Array.from(
   Array(moment().add(1, "year").year() - startYear + 1)

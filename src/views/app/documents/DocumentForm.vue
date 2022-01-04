@@ -65,6 +65,11 @@
           rules='required'
           :disabled='!isEditable'
         />
+        <vee-date
+          name='Expected completion date'
+          v-model='document.expectedCompletionDate'
+          clearable
+        />
       </template>
       <template slot='step-2'>
         <vee-autocomplete
@@ -229,6 +234,7 @@ import VeeFile from '@/components/forms/VeeFile.vue';
 
 export default Vue.extend({
   components: {
+    VeeDate,
     VeeFile,
     StepperLayout,
     LoaderSimple,
@@ -248,6 +254,7 @@ export default Vue.extend({
         documentStatusId: '',
         clientId: '',
         documentTypeId: '',
+        expectedCompletionDate: null,
         operations: [],
         grantors: [],
         groups: [],
@@ -366,6 +373,7 @@ export default Vue.extend({
           this.document.documentAttachments = document.documentAttachments;
           this.document.documentProperties = document.documentProperties;
           this.document.documentFiles = document.documentFiles;
+          this.document.expectedCompletionDate = document.expectedCompletionDate;
         } catch (e) {
           this.fetchError = e;
         }

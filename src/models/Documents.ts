@@ -6,6 +6,7 @@ export class Documents {
   clientId: number;
   documentStatusId: number;
   documentTypeId: number;
+  expectedCompletionDate: string;
   operations: [];
   groups: { name: string }[];
   grantors: [];
