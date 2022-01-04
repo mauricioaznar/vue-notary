@@ -12,6 +12,7 @@
            search: search,
            year: dates.year,
         }'
+    :row-class="rowClass"
   >
     <template slot='extension'>
       <date-tabs
@@ -154,7 +155,6 @@ export default Vue.extend({
   },
   methods: {
     rowClass: function(item) {
-      console.log(item)
       if (item.expectedCompletionDate && item.documentStatusId !== 4) {
         const days = getDaysSubNow(item.expectedCompletionDate);
         if (days <= 7) {
